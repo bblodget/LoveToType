@@ -42,6 +42,8 @@ function love.keypressed(key, unicode)
 	end
 
 	if key == "q" then
+		-- quit the program
+		love.event.push('q')
 	end
 
 end
