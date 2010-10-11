@@ -8,7 +8,9 @@ function love.load()
 	love.graphics.setBackgroundColor(128,128,255) -- light blue
 	love.graphics.setColor(0,0,0)  -- black
 	keysnd = love.audio.newSource("button-pressed.ogg", "static")
+	love.mouse.setVisible(false)
 	title.load()
+	--letters.load()
 end
 
 

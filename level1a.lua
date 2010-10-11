@@ -3,6 +3,7 @@
 module(..., package.seeall);
 
 require "levels"
+require "letters"
 
 local input = ""
 local line = 1
@@ -24,6 +25,7 @@ pattern[8] = "lll ddd"
 
 function load()
 	love.graphics.setBackgroundColor(128,255,128) -- light green
+	love.graphics.setColor(0,0,0)  -- black
 	love.draw = draw
 	love.keypressed = keypressed
 	input = ""
@@ -61,7 +63,7 @@ function keypressed(key, unicode)
 				line = 1
 				index = index + 1
 				if (index > pattern.size) then
-					levels.load()
+					letters.load()
 				end
 			end
 		else
