@@ -20,29 +20,34 @@ local rep_count = 1  -- pattern rep count
 local max_count = 0  -- max number of reps
 
 local word_list_ = {}
-local size_ = 1
+local info_list_ = {}
+local rand_ = false
+local words_per_line_ = 0
+local newTarget_		-- function for getting new target line
+
 
 local target = ""
 local x_start =0  -- x start pos
 
 local timer_on = false
-local words_per_line = 0
 local total_time = 0
 local total_words = 0
 local stime = 0  -- start time
 local etime = 0 -- end time
 
-function newTarget()
+local index = 1
+
+function newTargetRand()
 	local prev_index =0
 	local index = 0
 	local l_width = 0  -- line width
 	target = ""
-	for i=1,size_ do
+	for i=1,words_per_line_ do
 		while (index == prev_index) do
 			index = math.random(word_list_.size)
 		end
 		target = target .. word_list_[index]
-		if ( i < size_) then
+		if ( i < words_per_line_) then
 			target = target .. " "
 		end
 		prev_index = index
@@ -51,23 +56,50 @@ function newTarget()
 	x_start = 400 - (l_width/2)
 end
 
+function newTargetSeq()
+	local l_width = 0  -- line width
+	target = ""
+	for i=1,words_per_line_ do
+		target = target .. word_list_[index]
+		if ( i < words_per_line_) then
+			target = target .. " "
+		end
+		if (index < word_list_.size) then
+			index = index + 1
+		end
+	end
+	l_width = bigfont:getWidth(target)
+	x_start = 400 - (l_width/2)
+end
+
 -- word_list: the word list to use
--- size: how many words should be put on a line 
-function load(word_list, size)
+-- info_list: info about the key being taught. (can be nil)
+-- rand: boolen.  True = random order, False = seq order
+-- words_per_line: how many words should be put on a line 
+function load(word_list, info_list, rand, words_per_line)
 	word_list_ = word_list
-	size_ = size
+	info_list_ = info_list
+	rand_ = rand
+	words_per_line_ = words_per_line
+
+	index = 1
 
 	wpm = 0
 
 	timer_on = false;
-	words_per_line = size
 	total_time = 0
 	total_words = 0
 	stime = 0  
 	etime = 0 
 
-	max_count = 16/size
 	rep_count = 1
+	if (rand_) then
+		max_count = 16/words_per_line_
+		newTarget_ = newTargetRand
+	else
+		max_count = word_list_.size/words_per_line_
+		newTarget_ = newTargetSeq
+	end
 
 	love.graphics.setBackgroundColor(128,255,128) -- light green
 	love.graphics.setColor(0,0,0)  -- black
@@ -76,12 +108,15 @@ function load(word_list, size)
 	input = ""
 	line = 1
 	line1 = ""
-	newTarget()
+	newTarget_()  -- get first target line
 end
 
 
 function draw()
 	love.graphics.setFont(bigfont)
+	if (info_list_) then
+		love.graphics.printf(info_list_[index],10,50,800, 'left')
+	end
 	love.graphics.printf(target, x_start,150,800, 'left')
 	if (line == 1) then
 		love.graphics.printf(input .. "_", x_start,250,800, 'left')
@@ -101,7 +136,7 @@ function keypressed(key, unicode)
 		if (input == target) then
 			-- only track wpm if we got it right
 			total_time = total_time + (etime-stime)
-			total_words = total_words + words_per_line
+			total_words = total_words + words_per_line_
 			if (line == 1) then
 				line1 = input
 				input = ""
@@ -110,7 +145,8 @@ function keypressed(key, unicode)
 				input = ""
 				line1 = ""
 				line = 1
-				newTarget()
+
+				newTarget_()
 				rep_count = rep_count + 1
 				if (rep_count > max_count) then
 					wpm = (total_words * 60)/total_time
