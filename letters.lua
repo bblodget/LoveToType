@@ -13,17 +13,13 @@ local l_height = 0
 local count = 0
 
 local letter = {}
-letter.size = 8
-letter[1] = "a"
-letter[2] = "s"
-letter[3] = "d"
-letter[4] = "f"
-letter[5] = "j"
-letter[6] = "k"
-letter[7] = "l"
-letter[8] = ";"
 
-function load()
+local lesson_data_ = {}
+
+function load(lesson_data)
+	lesson_data_ = lesson_data
+	letter = lesson_data.letter
+
 	love.graphics.setBackgroundColor(130,41,79) -- purple
 	love.graphics.setColor(255,255,255)  -- white
 	love.graphics.setLineWidth( 3 )
@@ -62,7 +58,7 @@ function keypressed(key, unicode)
 			l_width = bigfont:getWidth(target)
 			count = count + 1
 			if (count == 30) then
-				level1a.load()
+				do_lesson.load(lesson_data_)
 			end
 		end
 	end

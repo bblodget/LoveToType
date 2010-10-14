@@ -3,7 +3,9 @@
 module(..., package.seeall);
 
 require "lessons"
-require "level1a"
+-- require "level1a"
+require "do_lesson"
+require "data_1a"
 
 local level=0
 local submenu = ""
@@ -39,7 +41,8 @@ function submenu_kp(key, unicode)
 
 	if key == "1" then
 		if level == 1 then
-			level1a.load()
+			-- level1a.load()
+			do_lesson.load(data_1a)
 		end
 	end
 

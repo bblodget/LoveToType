@@ -17,7 +17,12 @@ end
 function draw()
 	love.graphics.setFont(bigfont)
 
-	love.graphics.printf("Touch Typing Tutor",0,120,800, 'center')
+	love.graphics.setColor(255,255,255)  -- white?
+	love.graphics.draw(love_img, 250,110)
+
+	love.graphics.setColor(0,0,0)  -- black
+
+	love.graphics.printf("To Type",320,120,800, 'left')
 
 	if (not full_screen) then
 		love.graphics.printf("1. Lessons\n" .. 
