@@ -3,7 +3,6 @@
 module(..., package.seeall);
 
 require "levels"
-require "nonsense"
 require "letters"
 require "word"
 
