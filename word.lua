@@ -132,13 +132,9 @@ function keypressed(key, unicode)
 	if key == "escape" then
 		levels.load()
 	elseif key == "return" then
-		timer_on = false;
-		etime = love.timer.getTime()
+		etime = love.timer.getTime() -- get time before audio
 		love.audio.play(keysnd)
 		if (input == target) then
-			-- only track wpm if we got it right
-			total_time = total_time + (etime-stime)
-			total_words = total_words + words_per_line_
 			if (line == 1) then
 				line1 = input
 				input = ""
@@ -147,6 +143,11 @@ function keypressed(key, unicode)
 				input = ""
 				line1 = ""
 				line = 1
+
+				-- stop timing after 2nd line is correct
+				timer_on = false;
+				total_time = total_time + (etime-stime)
+				total_words = total_words + (words_per_line_*2)
 
 				newTarget_()
 				rep_count = rep_count + 1
@@ -169,6 +170,7 @@ function keypressed(key, unicode)
 	else
 		input = input .. key
 		if (not timer_on) then
+			-- start timing on first keypress of new target
 			timer_on = true
 			stime = love.timer.getTime()
 		end
