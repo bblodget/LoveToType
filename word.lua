@@ -23,6 +23,7 @@ local word_list_ = {}
 local info_list_ = {}
 local rand_ = false
 local words_per_line_ = 0
+local entries_per_line_ = 0
 local newTarget_		-- function for getting new target line
 
 
@@ -42,12 +43,12 @@ function newTargetRand()
 	local index = 0
 	local l_width = 0  -- line width
 	target = ""
-	for i=1,words_per_line_ do
+	for i=1,entries_per_line_ do
 		while (index == prev_index) do
 			index = math.random(word_list_.size)
 		end
 		target = target .. word_list_[index]
-		if ( i < words_per_line_) then
+		if ( i < entries_per_line_) then
 			target = target .. " "
 		end
 		prev_index = index
@@ -59,9 +60,9 @@ end
 function newTargetSeq()
 	local l_width = 0  -- line width
 	target = ""
-	for i=1,words_per_line_ do
+	for i=1,entries_per_line_ do
 		target = target .. word_list_[index]
-		if ( i < words_per_line_) then
+		if ( i < entries_per_line_) then
 			target = target .. " "
 		end
 		if (index < word_list_.size) then
@@ -80,7 +81,8 @@ function load(word_list, info_list, rand, words_per_line)
 	word_list_ = word_list
 	info_list_ = info_list
 	rand_ = rand
-	words_per_line_ = words_per_line
+	words_per_line_ = words_per_line 
+	entries_per_line_ = words_per_line_ / word_list_.words_per_index
 
 	index = 1
 
@@ -94,10 +96,10 @@ function load(word_list, info_list, rand, words_per_line)
 
 	rep_count = 1
 	if (rand_) then
-		max_count = 16/words_per_line_
+		max_count = 16/entries_per_line_
 		newTarget_ = newTargetRand
 	else
-		max_count = word_list_.size/words_per_line_
+		max_count = word_list_.size/entries_per_line_
 		newTarget_ = newTargetSeq
 	end
 

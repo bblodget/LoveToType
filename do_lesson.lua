@@ -17,7 +17,7 @@ function load(data)
 	love.graphics.setBackgroundColor(128,255,128) -- light green
 	love.graphics.setColor(0,0,0)  -- black
 
-	if (step_ == 1) then word.load(data_.nonsense,data_.intro,false,1)
+	if (step_ == 1) then word.load(data_.nonsense,data_.intro,false,2)
 	elseif (step_ == 2) then letters.load(data_)
 	elseif (step_ == 3) then word.load(data_.nonsense,nil,false,2)
 	elseif (step_ == 4) then letters.load(data_)

@@ -8,6 +8,7 @@ nonsense_rep = 1
 
 nonsense = {}
 nonsense.size = 8
+nonsense.words_per_index = 2
 nonsense[1] = "aaa jjj"
 nonsense[2] = "sss kkk"
 nonsense[3] = "ddd lll"
@@ -41,6 +42,7 @@ letter[8] = ";"
 
 short ={}
 short.size = 13
+short.words_per_index = 1
 short[1] = "skd"
 short[2] = "add"
 short[3] = "all"
@@ -57,6 +59,7 @@ short[13] = "dad"
 
 long ={}
 long.size = 13
+long.words_per_index = 1
 long[1] = "lads"
 long[2] = "daks"
 long[3] = "lakf"
