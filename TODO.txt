@@ -1,0 +1,9 @@
+To Do List
+
+- Change wpm calc from first keystroke of target until target
+  matched
+
+ - Create a WPM result screen after test runs
+
+
+
