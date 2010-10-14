@@ -1,9 +1,8 @@
 To Do List
 
-- Change wpm calc from first keystroke of target until target
-  matched
-
+ - Update letter not to pass the whole data set just the letter
+   table.
+ - Have letter keep track of /report characters per second.
  - Create a WPM result screen after test runs
-
 
 
