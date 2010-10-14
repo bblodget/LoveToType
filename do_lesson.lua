@@ -7,26 +7,29 @@ require "nonsense"
 require "letters"
 require "word"
 
-local step = 0
+local step_ = 0
+local data_ = {}  -- lesson data
 
-function load(lesson_data)
-	step = step + 1
+function load(data)
+	if data then data_ = data end
+
+	step_ = step_ + 1
 	love.graphics.setBackgroundColor(128,255,128) -- light green
 	love.graphics.setColor(0,0,0)  -- black
 
 	--[[
-	if (step == 1) then nonsense.load(lesson_data,true,1)
-	elseif (step == 2) then letters.load(lesson_data)
-	elseif (step == 3) then nonsense.load(lesson_data,false,1)
-	elseif (step == 4) then letters.load(lesson_data)
-	elseif (step == 5) then word.load(lesson_data,true,2)
-	elseif (step == 6) then word.load(lesson_data,false,4)
+	if (step_ == 1) then nonsense.load(data,true,1)
+	elseif (step_ == 2) then letters.load(data)
+	elseif (step_ == 3) then nonsense.load(data,false,1)
+	elseif (step_ == 4) then letters.load(data)
+	elseif (step_ == 5) then word.load(data,true,2)
+	elseif (step_ == 6) then word.load(data,false,4)
 	--]]
-	if (step == 1) then word.load(lesson_data,true,2)
-	elseif (step == 2) then word.load(lesson_data,false,4)
+	if (step_ == 1) then word.load(data_.short,2)
+	elseif (step_ == 2) then word.load(data_.long,4)
 	else 
 		-- back to the levels selection
-		step = 0
+		step_ = 0
 		levels.load()
 	end
 

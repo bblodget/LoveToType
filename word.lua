@@ -19,10 +19,7 @@ local line1 = ""
 local rep_count = 1  -- pattern rep count
 local max_count = 0  -- max number of reps
 
-local pattern = {}
-
-local lesson_data_ = {}
-local short_ = true
+local word_list_ = {}
 local size_ = 1
 
 local target = ""
@@ -42,9 +39,9 @@ function newTarget()
 	target = ""
 	for i=1,size_ do
 		while (index == prev_index) do
-			index = math.random(pattern.size)
+			index = math.random(word_list_.size)
 		end
-		target = target .. pattern[index]
+		target = target .. word_list_[index]
 		if ( i < size_) then
 			target = target .. " "
 		end
@@ -54,12 +51,10 @@ function newTarget()
 	x_start = 400 - (l_width/2)
 end
 
--- lesson_data: the data for this level
--- short: boolean, true if for short words
--- size: how many pattern entries should be put on a line (2 or 4)
-function load(lesson_data,short,size)
-	lesson_data_ = lesson_data
-	short_ = short
+-- word_list: the word list to use
+-- size: how many words should be put on a line 
+function load(word_list, size)
+	word_list_ = word_list
 	size_ = size
 
 	wpm = 0
@@ -73,14 +68,6 @@ function load(lesson_data,short,size)
 
 	max_count = 16/size
 	rep_count = 1
-
-	-- choose word list
-	if (short) then
-		pattern = lesson_data.short
-	else
-		pattern = lesson_data.long
-	end
-
 
 	love.graphics.setBackgroundColor(128,255,128) -- light green
 	love.graphics.setColor(0,0,0)  -- black
@@ -126,12 +113,11 @@ function keypressed(key, unicode)
 				newTarget()
 				rep_count = rep_count + 1
 				if (rep_count > max_count) then
-					--letters.load()
 					wpm = (total_words * 60)/total_time
 					print("words = " .. total_words)
 					print("time = " .. total_time .. " sec")
 					print("wpm = " .. wpm .. "\n")
-					do_lesson.load(lesson_data_)
+					do_lesson.load()
 				end
 			end
 		else
