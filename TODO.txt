@@ -2,7 +2,13 @@ To Do List
 
  - Update letter not to pass the whole data set just the letter
    table.
- - Have letter keep track of /report characters per second.
  - Create a WPM result screen after test runs
+ - Get level1a working all the way through
+ - Get the other levels working
+ - remove the diagnostics and game options for now
+ - create blodget.software@gmail.com for email address
+ - check in code into github
+ - Try the .love file in mac
+ - Try the .love file in windows
 
 

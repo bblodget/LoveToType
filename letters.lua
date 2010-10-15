@@ -12,13 +12,10 @@ local l_width = 0
 local l_height = 0
 local count = 0
 
-local letter = {}
+local letter_ = {}
 
-local lesson_data_ = {}
-
-function load(lesson_data)
-	lesson_data_ = lesson_data
-	letter = lesson_data.letter
+function load(letter)
+	letter_ = letter
 
 	love.graphics.setBackgroundColor(130,41,79) -- purple
 	love.graphics.setColor(255,255,255)  -- white
@@ -28,9 +25,9 @@ function load(lesson_data)
 	love.keypressed = keypressed
 	love.mousepressed = mousepressed
 	text = ""
-	index = math.random(letter.size)  
+	index = math.random(letter_.size)  
 	prev_index = index
-	target = letter[index]
+	target = letter_[index]
 	l_width = bigfont:getWidth(target)
 	l_height = bigfont:getHeight()
 	count = 0
@@ -52,13 +49,13 @@ function keypressed(key, unicode)
 			love.audio.play(keysnd)
 			prev_index = index
 			while (index == prev_index) do
-				index = math.random(letter.size)  
+				index = math.random(letter_.size)  
 			end
-			target = letter[index]
+			target = letter_[index]
 			l_width = bigfont:getWidth(target)
 			count = count + 1
 			if (count == 30) then
-				do_lesson.load(lesson_data_)
+				do_lesson.load()
 			end
 		end
 	end
