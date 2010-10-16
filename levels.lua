@@ -3,7 +3,6 @@
 module(..., package.seeall);
 
 require "lessons"
--- require "level1a"
 require "do_lesson"
 require "data_1a"
 
@@ -12,6 +11,8 @@ local submenu = ""
 
 function load()
 	love.graphics.setBackgroundColor(128,128,255) -- light blue
+	love.graphics.setColor(0,0,0)  -- black
+
 	love.draw = draw
 	love.keypressed = keypressed
 	level = 0

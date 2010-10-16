@@ -1,7 +1,5 @@
 To Do List
 
- - Update letter not to pass the whole data set just the letter
-   table.
  - Create a WPM result screen after test runs
  - Get level1a working all the way through
  - Get the other levels working
@@ -10,5 +8,6 @@ To Do List
  - check in code into github
  - Try the .love file in mac
  - Try the .love file in windows
+ - Add version number to title bar
 
 

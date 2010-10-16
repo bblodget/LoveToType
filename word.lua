@@ -153,9 +153,9 @@ function keypressed(key, unicode)
 				rep_count = rep_count + 1
 				if (rep_count > max_count) then
 					wpm = (total_words * 60)/total_time
-					print("words = " .. total_words)
-					print("time = " .. total_time .. " sec")
-					print("wpm = " .. wpm .. "\n")
+					--print("words = " .. total_words)
+					--print("time = " .. total_time .. " sec")
+					--print("wpm = " .. wpm .. "\n")
 					do_lesson.load()
 				end
 			end

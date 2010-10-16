@@ -2,6 +2,8 @@
 
 module(..., package.seeall);
 
+name="Lesson 1-A"
+
 target_wpm = 15
 actual_wpm = 0
 nonsense_rep = 1

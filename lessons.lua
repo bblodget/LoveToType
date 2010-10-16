@@ -11,6 +11,8 @@ local instruct = "Nonsense combinations will be displayed to introduce each new 
 
 function load()
 	love.graphics.setBackgroundColor(128,128,255) -- light blue
+	love.graphics.setColor(0,0,0)  -- black
+
 	love.draw = draw
 	love.keypressed = keypressed
 end
