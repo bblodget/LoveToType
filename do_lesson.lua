@@ -10,6 +10,18 @@ require "results"
 local step_ = 0
 local data_ = {}  -- lesson data
 
+
+-- The Lesson Outline
+-- nonsense x1 (first time x2 2nd time) (intro text)
+-- letter
+-- nonsense x1 (first time x2 2nd time) (no intro text)
+-- letter
+-- short x2 x8 (timed)
+-- actual wpm / target wpm 15
+-- long x4 x4 (timed)
+-- actual wpm / target wpm 15 (repeat or continue)
+
+
 function load(data)
 	if data then 
 		-- initialize

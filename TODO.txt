@@ -1,8 +1,8 @@
 To Do List
 
- - Remove/Comment out options that are not
-   available yet.
- - Get the other levels working
+ - Add Lesson 1-B
+ - Need to update word.lua to handle upper case
+ - Add comment headers,  copyright and license info
  - create blodget.software@gmail.com for email address
  - check in code into github
  - Try the .love file in mac

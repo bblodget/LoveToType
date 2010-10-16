@@ -5,6 +5,7 @@ module(..., package.seeall);
 require "lessons"
 require "do_lesson"
 require "data_1a"
+require "data_1b"
 
 local level=0
 local submenu = ""
@@ -40,13 +41,14 @@ function submenu_kp(key, unicode)
 		submenu = ""
 	end
 
-	if key == "1" then
-		if level == 1 then
-			-- level1a.load()
+	if level==1 then
+		if key == "1" then
 			do_lesson.load(data_1a)
 		end
+		if key == "2" then
+			do_lesson.load(data_1b)
+		end
 	end
-
 end
 
 -- select lesson level
@@ -57,7 +59,7 @@ function keypressed(key, unicode)
 
 	if key == "1" then level = 1
 		submenu = "1. Lesson 1-A    [home keys] \n" ..
-				  --"2. Lesson 1-B    [e n g o]  \n" ..
+				  "2. Lesson 1-B    [e n g o]  \n" ..
 				  --"3. Review 1 \n\n" ..
 				  "        Your Choice?"
 		love.keypressed = submenu_kp

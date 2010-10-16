@@ -3,6 +3,7 @@
 module(..., package.seeall);
 
 name="Lesson 1-A"
+-- home row
 
 target_wpm = 15
 actual_wpm = 0
@@ -75,18 +76,4 @@ long[10] = "lads"
 long[11] = "jakl"
 long[12] = "falls"
 long[13] = "alas"
-
--- The Flow
--- nonsense x1 (first time x2 2nd time) (intro text)
--- letter
--- nonsense x1 (first time x2 2nd time) (no intro text)
--- letter
--- short x2 x8 (timed)
--- actual wpm / target wpm 15
--- long x4 x4 (timed)
--- actual wpm / target wpm 15 (repeat or continue)
-
-
-
-
 

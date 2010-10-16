@@ -28,6 +28,7 @@ local newTarget_		-- function for getting new target line
 
 
 local target = ""
+local info = ""
 local x_start =0  -- x start pos
 
 local timer_on = false
@@ -37,6 +38,8 @@ local stime = 0  -- start time
 local etime = 0 -- end time
 
 local index = 1
+
+local uppercase_ = false;
 
 function newTargetRand()
 	local prev_index =0
@@ -62,6 +65,9 @@ function newTargetSeq()
 	target = ""
 	for i=1,entries_per_line_ do
 		target = target .. word_list_[index]
+		if (info_list_) then
+			info = info_list_[index]
+		end
 		if ( i < entries_per_line_) then
 			target = target .. " "
 		end
@@ -85,6 +91,7 @@ function load(word_list, info_list, rand, words_per_line)
 	entries_per_line_ = words_per_line_ / word_list_.words_per_index
 
 	index = 1
+	info = ""
 
 	wpm = 0
 
@@ -93,6 +100,8 @@ function load(word_list, info_list, rand, words_per_line)
 	total_words = 0
 	stime = 0  
 	etime = 0 
+
+	uppercase_ = false;
 
 	rep_count = 1
 	if (rand_) then
@@ -117,7 +126,7 @@ end
 function draw()
 	love.graphics.setFont(bigfont)
 	if (info_list_) then
-		love.graphics.printf(info_list_[index],10,50,800, 'left')
+		love.graphics.printf(info,10,10,800, 'left')
 	end
 	love.graphics.printf(target, x_start,150,800, 'left')
 	if (line == 1) then
@@ -162,12 +171,18 @@ function keypressed(key, unicode)
 		else
 			input = ""
 		end
-	elseif (key == "backspace" or 
-			key == "rshift" or
-			key == "lshift"
-			)  then
-			-- do nothing
+	elseif (key == "backspace") then
+		-- do nothing
+	elseif ( key == "rshift" or
+			key == "lshift")  then
+			uppercase_ = true
 	else
+		if (uppercase_) then
+			-- convert to upper case
+			key = string.upper(key)
+			uppercase_ = false
+		end
+
 		input = input .. key
 		if (not timer_on) then
 			-- start timing on first keypress of new target
