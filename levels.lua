@@ -23,9 +23,9 @@ function draw()
 	love.graphics.setFont(bigfont)
 	love.graphics.printf("Lessons",0,50,800, 'center')
 	if (level == 0) then
-		love.graphics.printf("Level (1-8)? ", 50,150,740, 'left')
+		love.graphics.printf("Level (1-1)? ", 50,150,740, 'left')
 	else
-		love.graphics.printf("Level (1-8)? " .. level, 50,150,740, 'left')
+		love.graphics.printf("Level (1-1)? " .. level, 50,150,740, 'left')
 		love.graphics.printf(submenu, 50,220,740, 'left')
 	end
 	love.graphics.printf("Esc=Back",0,500,800, 'center')
@@ -57,10 +57,12 @@ function keypressed(key, unicode)
 
 	if key == "1" then level = 1
 		submenu = "1. Lesson 1-A    [home keys] \n" ..
-				  "2. Lesson 1-B    [e n g o]  \n" ..
-				  "3. Review 1 \n\n" ..
+				  --"2. Lesson 1-B    [e n g o]  \n" ..
+				  --"3. Review 1 \n\n" ..
 				  "        Your Choice?"
 		love.keypressed = submenu_kp
+	end
+	--[[
 	elseif key == "2" then level = 2
 		submenu = "1. Lesson 2-A    [t i h c] \n" ..
 				  "2. Lesson 2-B    [r u v p .]  \n" ..
@@ -102,6 +104,7 @@ function keypressed(key, unicode)
 				  "        Your Choice?"
 		love.keypressed = submenu_kp
 	end
+	--]]
 
 end
 

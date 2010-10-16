@@ -1,10 +1,8 @@
 To Do List
 
- - Update target WPM and enable long patters the 2nd 
- 	doing a level time.
- - Get level1a working all the way through
+ - Remove/Comment out options that are not
+   available yet.
  - Get the other levels working
- - remove the diagnostics and game options for now
  - create blodget.software@gmail.com for email address
  - check in code into github
  - Try the .love file in mac

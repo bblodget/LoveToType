@@ -28,18 +28,21 @@ function draw()
 
 	if (not full_screen) then
 		love.graphics.printf("1. Lessons\n" .. 
-							 "2. Diagnostic\n" ..
-							 "3. Game\n" ..
-							 "4. Full Screen\n" ..
-							 "5. Quit\n", 
+							 "2. Full Screen\n" ..
+							 "3. Quit\n", 
 					280,220,800, 'left')
+					-- coming soon
+					--		 "2. Diagnostic\n" ..
+					--		 "3. Game\n" ..
 	else
 		love.graphics.printf("1. Lessons\n" .. 
-							 "2. Diagnostic\n" ..
-							 "3. Game\n" ..
-							 "4. Windowed Screen\n" ..
-							 "5. Quit\n",
+							 "2. Windowed Screen\n" ..
+							 "3. Quit\n",
 					280,220,800, 'left')
+
+					-- coming soon
+					-- 		"2. Diagnostic\n" ..
+					-- 		"3. Game\n" ..
 	end
 
 	love.graphics.printf("Your Choice? ",400,450,800, 'left')
@@ -68,7 +71,7 @@ function keypressed(key, unicode)
 		lessons.load()
 	end
 
-	if key == "4" then
+	if key == "2" then
 		if (not full_screen) then
 			fullScreen()
 		else
@@ -76,7 +79,7 @@ function keypressed(key, unicode)
 		end
 	end
 
-	if key == "5" then
+	if key == "3" then
 		-- quit the program
 		windowScreen()
 		love.event.push('q')
