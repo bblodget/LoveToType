@@ -23,6 +23,6 @@ License along with this program.  If not, see
 
 enjoy,
 
-Brandon Blodget
+Brandon Blodget <blodget.sw@gmail.com>
 
 
