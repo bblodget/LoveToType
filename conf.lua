@@ -1,10 +1,10 @@
 -- conf.lua
 
 function love.conf(t)
-	t.title = "Love To Type"
+	t.title = "Love To Type version 0.1"
 	t.author = "Brandon Blodget"
 	t.screen.width = 800
 	t.screen.height = 600
-	t.version = 0
+	t.version = 0.1
 end
 
