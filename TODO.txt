@@ -1,9 +1,8 @@
 To Do List
 
- - Add comment headers,  copyright and license info
- - create blodget.software@gmail.com for email address
- - check in code into github
- - Try the .love file in mac
- - Try the .love file in windows
+ - Write Lesson 1 Review 
+ - Write Lessons 2 - 8
+ - Write typing game
+
 
 
