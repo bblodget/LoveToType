@@ -6,7 +6,7 @@ name="Lesson 1-A"
 
 target_wpm = 15
 actual_wpm = 0
-nonsense_rep = 1
+nonsense_len = 2
 
 nonsense = {}
 nonsense.size = 8

@@ -1,6 +1,7 @@
 To Do List
 
- - Create a WPM result screen after test runs
+ - Update target WPM and enable long patters the 2nd 
+ 	doing a level time.
  - Get level1a working all the way through
  - Get the other levels working
  - remove the diagnostics and game options for now
