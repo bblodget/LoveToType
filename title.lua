@@ -17,90 +17,94 @@
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
-module(..., package.seeall);
 
-require "lessons"
+Title = {}
+Title.__index = Title
 
-local changed = false
-local full_screen = false
+function Title.create()
+	local temp = {}
+	setmetatable(temp, Title)
 
-function load()
-	love.graphics.setBackgroundColor(128,128,255) -- light blue
-	love.graphics.setColor(0,0,0)  -- black
+	temp.button = {	
+		logo = Button.createImageButton(graphics.logo, 320, 110),
+		title = Button.createTextButton("To Type", 430, 120, false),
+		lessons = Button.createTextButton("Lessons", 400, 250),
+		screen = Button.createTextButton("Full Screen", 400, 300),
+		quit = Button.createTextButton("Quit", 400, 350) 
+		}
 
-	love.draw = draw
-	love.keypressed = keypressed
+	temp.full_screen = false
+	return temp
 end
 
 
-function draw()
-	love.graphics.setFont(bigfont)
+function Title:draw()
+	love.graphics.setBackgroundColor(unpack(background))
 
-	love.graphics.setColor(255,255,255)  -- white?
-	love.graphics.draw(love_img, 250,110)
+	for n,b in pairs(self.button) do
+		b:draw()
+	end
 
-	love.graphics.setColor(0,0,0)  -- black
+end
 
-	love.graphics.printf("To Type",320,120,800, 'left')
+function Title:update(dt)
 
-	if (not full_screen) then
-		love.graphics.printf("1. Lessons\n" .. 
-							 "2. Full Screen\n" ..
-							 "3. Quit\n", 
-					280,220,800, 'left')
-					-- coming soon
-					--		 "2. Diagnostic\n" ..
-					--		 "3. Game\n" ..
+	for n,b in pairs(self.button) do
+		b:update(dt)
+	end
+
+end
+
+function Title:mousepressed(x,y,button)
+	for n,b in pairs(self.button) do
+		if b:mousepressed(x,y,button) then
+			if n == "lessons" then
+			elseif n == "screen" then
+				self:toggleScreen()
+			elseif n == "quit" then
+				self:windowScreen()
+				love.event.push("q")
+			end
+		end
+	end
+
+end
+
+function Title:keypressed(key)
+	if key == "escape" then
+		love.event.push("q")
+	end
+end
+
+function Title:toggleScreen()
+
+	if (self.full_screen) then
+		self:windowScreen()
+		self.button.screen = Button.createTextButton("Full Screen", 400, 300)
 	else
-		love.graphics.printf("1. Lessons\n" .. 
-							 "2. Windowed Screen\n" ..
-							 "3. Quit\n",
-					280,220,800, 'left')
-
-					-- coming soon
-					-- 		"2. Diagnostic\n" ..
-					-- 		"3. Game\n" ..
+		self:fullScreen()
+		self.button.screen = Button.createTextButton("Windowed Screen", 400, 300)
 	end
 
-	love.graphics.printf("Your Choice? ",400,450,800, 'left')
 end
 
-function fullScreen()
-	if (not full_screen) then
+function Title:fullScreen()
+	if (not self.full_screen) then
 		-- change to full screen
-		changed = love.graphics.toggleFullscreen()
+		local changed = love.graphics.toggleFullscreen()
 		if (changed) then
-			full_screen = true
+			self.full_screen = true
 		end
 	end
 end
 
-function windowScreen()
+function Title:windowScreen()
 	-- change to window mode
-	changed = love.graphics.setMode(800,600,false,true)
+	local changed = love.graphics.setMode(800,600,false,true)
 	if (changed) then
-		full_screen = false
+		self.full_screen = false
 	end
 end
 
-function keypressed(key, unicode)
-	if key == "1" then
-		lessons.load()
-	end
-
-	if key == "2" then
-		if (not full_screen) then
-			fullScreen()
-		else
-			windowScreen()
-		end
-	end
-
-	if key == "3" then
-		-- quit the program
-		windowScreen()
-		love.event.push('q')
-	end
-end
 
 

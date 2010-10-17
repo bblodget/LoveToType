@@ -17,21 +17,67 @@
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
+require("lua/button.lua")
 require "title"
 
 function love.load()
-	bigfont = love.graphics.newFont(34) -- font size
-	smallfont = love.graphics.newFont(24) -- font size
-	love.graphics.setBackgroundColor(128,128,255) -- light blue
-	keysnd = love.audio.newSource("sounds/button-pressed.ogg", "static")
-	love_img = love.graphics.newImage("images/love-ball.png")
-	love.mouse.setVisible(false)
+
+	-- Resources
+	color = {	light_blue = {128,128,255},
+				bright_blue = {63,193,245},
+				black = {0,0,0},
+				white = {255,255,255},
+				overlay = {255,255,255,235} }
+
+	font = {	default = love.graphics.newFont(24),
+				large = love.graphics.newFont(32),
+				huge = love.graphics.newFont(72),
+				small = love.graphics.newFont(22) }
+
+	graphics = {logo = love.graphics.newImage("images/love-ball.png")}
+				
+	sound =	{	beep = love.audio.newSource("sounds/button-pressed.ogg", "static")}
+
 
 	-- Initialize the pseudo random number generator
 	math.randomseed( os.time() )
 	math.random(); math.random(); math.random()
 
-	title.load()
+	-- Variables
+	audio = true
+	state = Title.create() -- init game state
+
+	background = color.light_blue
+	normal_text = color.black
+	hover_text = color.bright_blue
+	overlay = color.overlay
+
 end
+
+
+function love.draw()
+
+	state:draw()
+
+end
+
+function love.update(dt)
+
+	state:update(dt)
+
+end
+
+function love.mousepressed(x, y, button)
+
+	state:mousepressed(x,y,button)
+
+end
+
+function love.keypressed(key)
+
+	state:keypressed(key)
+
+end
+
 
 
