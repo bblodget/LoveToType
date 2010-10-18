@@ -51,7 +51,7 @@ function Lesson:next()
 	self.step = self.step + 1
 	local data = self.data
 
-	-- self.step = 2  -- for debug
+	self.step = 5  -- for debug
 
 	if (self.step == 1) then
 		return Word.create(self.data.nonsense,self.data.intro,false,self.data.nonsense_len);
@@ -67,7 +67,7 @@ function Lesson:next()
 		data.actual_wpm = wpm
 		return Results.create(data.name,false,data.actual_wpm,data.target_wpm)
 	elseif (self.step == 7) then 
-		return word.create(data.long,nil,true,4)
+		return Word.create(data.long,nil,true,4)
 	elseif (self.step == 8) then 
 		data.actual_wpm = wpm
 		local target = data.target_wpm

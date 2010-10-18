@@ -1,5 +1,7 @@
 To Do List
 
+ - Change letters to not have box and be BIGGER
+ - Add ability for TAB and ENTER to select menu choices
  - Update lessons.lua to be OO style
  - Update text offsets so it works with love 0.6.2
  - Update Menus so it uses buttons

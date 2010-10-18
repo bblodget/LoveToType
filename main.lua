@@ -24,6 +24,7 @@ require "lessonInstruct"
 require "lesson"
 require "word"
 require "letters"
+require "results"
 require "data_1a"
 require "data_1b"
 
@@ -33,6 +34,7 @@ function love.load()
 	color = {	light_blue = {128,128,255},
 				bright_blue = {63,193,245},
 				light_green = {128,255,128},
+				pink = {255,128,128},
 				purple = {130,41,79},
 				black = {0,0,0},
 				white = {255,255,255},
