@@ -38,7 +38,8 @@ function LessonInstruct.create()
 		"Type these twice, pressing ENTER or RETURN at the end of each line.  " ..
 		"Next, keys will be displayed one at a time in a box.  Type the key that is shown.  " ..
 		"Then words or combinations using the new keys will be displayed.  Type each line twice. " ..
-		"At the end of the lesson, your actual and target words per minute will be displayed."
+		"At the end of the lesson, your actual and target words per minute will be displayed." ..
+		"You can exit the lesson at any time by pressing the Escape key."
 
 	return temp
 end

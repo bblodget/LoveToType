@@ -124,8 +124,10 @@ end
 
 function Word:draw()
 	if (self.info_list) then
+		love.graphics.setFont(font.default)
 		love.graphics.printf(self.info,10,50,800, 'left')
 	end
+	love.graphics.setFont(font.large)
 	love.graphics.printf(self.target, self.x_start,150,800, 'left')
 	if (self.line == 1) then
 		love.graphics.printf(self.input .. "_", self.x_start,250,800, 'left')
@@ -147,7 +149,7 @@ end
 
 function Word:keypressed(key, unicode)
 	if key == "escape" then
-		state = create.LessonMenu()
+		state = LessonMenu.create()
 	elseif key == "return" then
 		self.etime = love.timer.getTime() -- get time before audio
 		love.audio.stop()

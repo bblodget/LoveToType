@@ -17,72 +17,74 @@
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
-module(..., package.seeall);
+Letters = {}
+Letters.__index = Letters
 
-require "levels"
 
-local text = ""
-local target = ""
-local prev_index = 1
-local index = 1  -- index into letter array
-local l_width = 0
-local l_height = 0
-local count = 0
+function Letters.create(letter)
+	local temp = {}
+	setmetatable(temp, Letters)
 
-local letter_ = {}
+	temp.letter = letter
 
-function load(letter)
-	letter_ = letter
+	temp.index = math.random(letter.size)  -- index into letter array
+	temp.prev_index = index
+	temp.target = letter[temp.index]
+	temp.l_width = font.large:getWidth(temp.target)
+	temp.l_height = font.large:getHeight()
+	temp.count = 0
 
-	love.graphics.setBackgroundColor(130,41,79) -- purple
-	love.graphics.setColor(255,255,255)  -- white
+	love.graphics.setBackgroundColor(unpack(color.purple)) 
+	love.graphics.setColor(unpack(color.white))  
 	love.graphics.setLineWidth( 3 )
-	love.graphics.setFont(bigfont)
-	love.draw = draw
-	love.keypressed = keypressed
-	love.mousepressed = mousepressed
-	text = ""
-	index = math.random(letter_.size)  
-	prev_index = index
-	target = letter_[index]
-	l_width = bigfont:getWidth(target)
-	l_height = bigfont:getHeight()
-	count = 0
+	love.graphics.setFont(font.large)
+
+	return temp
+
 end
 
 
-function draw()
-	love.graphics.printf(text,10,10,740, "left")
-	love.graphics.rectangle( "line", 350, 150, 50, 50 )
-	love.graphics.printf(target, 375-(l_width/2), 170-(l_height/2), 400, "left")
+function Letters:draw()
+	local bx = 375
+	local by = 125
+	local bs = 50
+
+	local lx = bx - (self.l_width/2) + (bs/2)
+	local ly = by + (self.l_height/2) + (bs/2) - 5
+
+
+	love.graphics.rectangle( "line", bx, by, bs, bs )
+	love.graphics.printf(self.target, lx, ly, 800, "left")
+
 end
 
-function keypressed(key, unicode)
+function Letters:keypressed(key, unicode)
 	if key == "escape" then
-		levels.load()
+		state = LessonMenu.create()
 	else 
-		if (key == target) then
+		if (key == self.target) then
 			love.audio.stop()
-			love.audio.play(keysnd)
-			prev_index = index
-			while (index == prev_index) do
-				index = math.random(letter_.size)  
+			love.audio.play(sound.beep)
+			self.prev_index = self.index
+			while (self.index == self.prev_index) do
+				self.index = math.random(self.letter.size)  
 			end
-			target = letter_[index]
-			l_width = bigfont:getWidth(target)
-			count = count + 1
-			if (count == 30) then
-				do_lesson.load()
+			self.target = self.letter[self.index]
+			self.l_width = font.large:getWidth(self.target)
+			self.count = self.count + 1
+			if (self.count == 30) then
+				state = lesson:next()
 			end
 		end
 	end
 end
 
-function mousepressed(x, y, button)
-   if button == 'l' then
-      text = "X:"..x.." Y: "..y
-   end
+
+function Letters:update(dt)
+	return;	-- do nothing
 end
 
-
+function Letters:mousepressed(x,y,button)
+	return;	-- do nothing
+end
 
