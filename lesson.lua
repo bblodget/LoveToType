@@ -1,4 +1,4 @@
--- do_lesson.lua
+-- lesson.lua
 -- 
 -- Copyright 2010 Brandon Blodget
 --
@@ -17,12 +17,26 @@
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
-module(..., package.seeall);
 
-require "levels"
-require "letters"
-require "word"
-require "results"
+
+Lesson = {}
+Lesson.__index = Lesson
+
+
+function Title.create()
+	local temp = {}
+	setmetatable(temp, Title)
+
+	temp.full_screen = false
+	return temp
+end
+
+
+
+
+
+
+--------------- Old Stuf -----------------
 
 local step_ = 0
 local data_ = {}  -- lesson data

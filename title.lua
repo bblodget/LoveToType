@@ -59,6 +59,7 @@ function Title:mousepressed(x,y,button)
 	for n,b in pairs(self.button) do
 		if b:mousepressed(x,y,button) then
 			if n == "lessons" then
+				state = LessonMenu.create()
 			elseif n == "screen" then
 				self:toggleScreen()
 			elseif n == "quit" then

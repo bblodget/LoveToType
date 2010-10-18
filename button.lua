@@ -96,6 +96,7 @@ function Button:mousepressed(x, y, button)
 	
 	if self.hover then
 		if (audio and self.enable) then
+			love.audio.stop()
 			love.audio.play(sound["beep"])
 		end
 		return true

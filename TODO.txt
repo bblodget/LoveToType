@@ -1,5 +1,6 @@
 To Do List
 
+ - Update lessons.lua to be OO style
  - Update text offsets so it works with love 0.6.2
  - Update Menus so it uses buttons
  - Write Lesson 1 Review 

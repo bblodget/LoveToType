@@ -17,8 +17,9 @@
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
-require("lua/button.lua")
+require "button"
 require "title"
+require "lessonMenu"
 
 function love.load()
 
