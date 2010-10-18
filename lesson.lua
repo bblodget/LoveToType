@@ -51,8 +51,6 @@ function Lesson:next()
 	self.step = self.step + 1
 	local data = self.data
 
-	self.step = 5  -- for debug
-
 	if (self.step == 1) then
 		return Word.create(self.data.nonsense,self.data.intro,false,self.data.nonsense_len);
 	elseif (self.step == 2) then 
