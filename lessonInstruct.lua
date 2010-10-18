@@ -52,8 +52,6 @@ function LessonInstruct:draw()
 
 	love.graphics.printf(self.instruct, 100,200,600,"center")
 
---	love.graphics.printf("The point of this game is to fill out a standard, randomly generated, nonogram by using the mouse. The left mouse button fills in (or \"un-fills\") an area whilst the right mouse button is used to set hints where you think an area shouldn't be filled.\nUse the escape key to pause the game.\n\nGood luck.", 100, 250, 600, "center")
-	
 	for n,b in pairs(self.button) do
 		b:draw()
 	end
@@ -86,39 +84,5 @@ function LessonInstruct:keypressed(key)
 	end
 end
 
-
--------  Old code ----------
-
-local instruct = "Nonsense combinations will be displayed to introduce each new key.  Type these twice, pressing RETURN at the end of each line.\n\n" ..
-"Next, several keys will be displayed, one at a time.  Type the key that is shown.\n\n" ..
-"Then words or combinations using the new keys will be displayed.  Type each line twice."
-
-function load()
-	love.graphics.setBackgroundColor(128,128,255) -- light blue
-	love.graphics.setColor(0,0,0)  -- black
-
-	love.draw = draw
-	love.keypressed = keypressed
-end
-
-function draw()
-	love.graphics.setFont(bigfont)
-	love.graphics.printf("Lessons",0,50,800, 'center')
-	love.graphics.setFont(smallfont)
-	love.graphics.printf(instruct, 50,150,740, 'left')
-	love.graphics.setFont(bigfont)
-	love.graphics.printf("Esc=Back or RETURN=Continue",0,500,800, 'center')
-end
-
-function keypressed(key, unicode)
-	if key == "escape" then
-		title.load()
-	end
-
-	if key == "return" then
-		levels.load()
-	end
-
-end
 
 

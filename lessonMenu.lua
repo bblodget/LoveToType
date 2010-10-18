@@ -143,6 +143,17 @@ function LessonMenu:mousepressed(x,y,button)
 				self.button.sub1 = Button.createTextButton("Lesson 8-A    [, < . >]",cx,yy)
 				self.button.sub2 = Button.createTextButton("Lesson 8 Review",cx,yy+(s*1))
 				self.button.sub3 = nil
+			elseif n == "sub1" then
+				if (self.level == 1) then
+					lesson = Lesson.create(data_1a)
+					state = lesson:next()
+				end
+			elseif n == "sub2" then
+				if (self.level == 1) then
+					lesson = Lesson.create(data_1b)
+					state = lesson:next()
+				end
+			elseif n == "sub3" then
 			elseif n == "back" then
 				state = Title.create()
 			end

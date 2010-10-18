@@ -17,194 +17,184 @@
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
-module(..., package.seeall);
 
-require "levels"
-require "do_lesson"
+Word = {}
+Word.__index = Word
 
--- global variable
-
-wpm =0  -- words per minute
-
--- module vairables
-local input = ""
-local line = 1
-
-local text = {}
-local line1 = ""
-
-local rep_count = 1  -- pattern rep count
-local max_count = 0  -- max number of reps
-
-local word_list_ = {}
-local info_list_ = {}
-local rand_ = false
-local words_per_line_ = 0
-local entries_per_line_ = 0
-local newTarget_		-- function for getting new target line
-
-
-local target = ""
-local info = ""
-local x_start =0  -- x start pos
-
-local timer_on = false
-local total_time = 0
-local total_words = 0
-local stime = 0  -- start time
-local etime = 0 -- end time
-
-local index = 1
-
-local uppercase_ = false;
-
-function newTargetRand()
-	local prev_index =0
-	local index = 0
-	local l_width = 0  -- line width
-	target = ""
-	for i=1,entries_per_line_ do
-		while (index == prev_index) do
-			index = math.random(word_list_.size)
-		end
-		target = target .. word_list_[index]
-		if ( i < entries_per_line_) then
-			target = target .. " "
-		end
-		prev_index = index
-	end
-	l_width = bigfont:getWidth(target)
-	x_start = 400 - (l_width/2)
-end
-
-function newTargetSeq()
-	local l_width = 0  -- line width
-	target = ""
-	for i=1,entries_per_line_ do
-		target = target .. word_list_[index]
-		if (info_list_) then
-			info = info_list_[index]
-		end
-		if ( i < entries_per_line_) then
-			target = target .. " "
-		end
-		if (index < word_list_.size) then
-			index = index + 1
-		end
-	end
-	l_width = bigfont:getWidth(target)
-	x_start = 400 - (l_width/2)
-end
 
 -- word_list: the word list to use
 -- info_list: info about the key being taught. (can be nil)
 -- rand: boolen.  True = random order, False = seq order
 -- words_per_line: how many words should be put on a line 
-function load(word_list, info_list, rand, words_per_line)
-	word_list_ = word_list
-	info_list_ = info_list
-	rand_ = rand
-	words_per_line_ = words_per_line 
-	entries_per_line_ = words_per_line_ / word_list_.words_per_index
+function Word.create(word_list, info_list, rand, words_per_line)
+	local temp = {}
+	setmetatable(temp, Word)
 
-	index = 1
-	info = ""
+	temp.word_list = word_list
+	temp.info_list = info_list
+	temp.rand = rand
+	temp.words_per_line = words_per_line 
+	temp.entries_per_line = words_per_line / word_list.words_per_index
 
-	wpm = 0
+	temp.index = 1
+	temp.info = ""
+	temp.target = ""
 
-	timer_on = false;
-	total_time = 0
-	total_words = 0
-	stime = 0  
-	etime = 0 
+	temp.x_start = 0
 
-	uppercase_ = false;
+	temp.wpm = 0
 
-	rep_count = 1
-	if (rand_) then
-		max_count = 16/entries_per_line_
-		newTarget_ = newTargetRand
+	temp.timer_on = false;
+	temp.total_time = 0
+	temp.total_words = 0
+	temp.stime = 0  
+	temp.etime = 0 
+
+	temp.uppercase = false;
+
+	temp.rep_count = 1
+	if (temp.rand) then
+		temp.max_count = 16/temp.entries_per_line
 	else
-		max_count = word_list_.size/entries_per_line_
-		newTarget_ = newTargetSeq
+		temp.max_count = temp.word_list.size/temp.entries_per_line
 	end
 
-	love.graphics.setBackgroundColor(128,255,128) -- light green
-	love.graphics.setColor(0,0,0)  -- black
-	love.draw = draw
-	love.keypressed = keypressed
-	input = ""
-	line = 1
-	line1 = ""
-	newTarget_()  -- get first target line
+	temp.input = ""
+	temp.line = 1
+	temp.line1 = ""
+
+	-- set font, background and text color
+	love.graphics.setFont(font.large)
+	love.graphics.setBackgroundColor(unpack(color.light_green)) 
+	love.graphics.setColor(unpack(color.black)) 
+
+	temp.newTarget(temp)  -- get first target line
+
+	return temp
 end
 
 
-function draw()
-	love.graphics.setFont(bigfont)
-	if (info_list_) then
-		love.graphics.printf(info,10,10,800, 'left')
-	end
-	love.graphics.printf(target, x_start,150,800, 'left')
-	if (line == 1) then
-		love.graphics.printf(input .. "_", x_start,250,800, 'left')
+function Word:newTarget()
+	if (self.rand) then
+		self:newTargetRand()
 	else
-		love.graphics.printf(line1, x_start,250,800, 'left')
-		love.graphics.printf(input .. "_", x_start,300,800, 'left')
+		self:newTargetSeq()
 	end
 end
 
-function keypressed(key, unicode)
+
+function Word:newTargetRand()
+	local prev_index =0
+	local index = 0
+	local l_width = 0  -- line width
+	self.target = ""
+	for i=1,self.entries_per_line do
+		while (index == prev_index) do
+			index = math.random(self.word_list.size)
+		end
+		self.target = self.target .. self.word_list[index]
+		if ( i < self.entries_per_line) then
+			self.target = self.target .. " "
+		end
+		prev_index = index
+	end
+	l_width = font.large:getWidth(self.target)
+	self.x_start = 400 - (l_width/2)
+end
+
+function Word:newTargetSeq()
+	local l_width = 0  -- line width
+	self.target = ""
+	for i=1,self.entries_per_line do
+		self.target = self.target .. self.word_list[self.index]
+		if (self.info_list) then
+			self.info = self.info_list[self.index]
+		end
+		if ( i < self.entries_per_line) then
+			self.target = self.target .. " "
+		end
+		if (self.index < self.word_list.size) then
+			self.index = self.index + 1
+		end
+	end
+	l_width = font.large:getWidth(self.target)
+	self.x_start = 400 - (l_width/2)
+end
+
+
+function Word:draw()
+	if (self.info_list) then
+		love.graphics.printf(self.info,10,50,800, 'left')
+	end
+	love.graphics.printf(self.target, self.x_start,150,800, 'left')
+	if (self.line == 1) then
+		love.graphics.printf(self.input .. "_", self.x_start,250,800, 'left')
+	else
+		love.graphics.printf(self.line1, self.x_start,250,800, 'left')
+		love.graphics.printf(self.input .. "_", self.x_start,300,800, 'left')
+	end
+end
+
+
+function Word:update(dt)
+	return;	-- do nothing
+end
+
+function Word:mousepressed(x,y,button)
+	return;	-- do nothing
+end
+
+
+function Word:keypressed(key, unicode)
 	if key == "escape" then
-		levels.load()
+		state = create.LessonMenu()
 	elseif key == "return" then
-		etime = love.timer.getTime() -- get time before audio
-		love.audio.play(keysnd)
-		if (input == target) then
-			if (line == 1) then
-				line1 = input
-				input = ""
-				line = 2
+		self.etime = love.timer.getTime() -- get time before audio
+		love.audio.stop()
+		love.audio.play(sound.beep)
+		if (self.input == self.target) then
+			if (self.line == 1) then
+				self.line1 = self.input
+				self.input = ""
+				self.line = 2
 			else
-				input = ""
-				line1 = ""
-				line = 1
+				self.input = ""
+				self.line1 = ""
+				self.line = 1
 
 				-- stop timing after 2nd line is correct
-				timer_on = false;
-				total_time = total_time + (etime-stime)
-				total_words = total_words + (words_per_line_*2)
+				self.timer_on = false;
+				self.total_time = self.total_time + (self.etime-self.stime)
+				self.total_words = self.total_words + (self.words_per_line*2)
 
-				newTarget_()
-				rep_count = rep_count + 1
-				if (rep_count > max_count) then
-					wpm = (total_words * 60)/total_time
-					--print("words = " .. total_words)
-					--print("time = " .. total_time .. " sec")
-					--print("wpm = " .. wpm .. "\n")
-					do_lesson.load()
+				self:newTarget()
+				self.rep_count = self.rep_count + 1
+				if (self.rep_count > self.max_count) then
+					self.wpm = math.floor((self.total_words * 60)/self.total_time)
+					wpm = self.wpm
+					state = lesson:next()
 				end
 			end
 		else
-			input = ""
+			self.input = ""
 		end
 	elseif (key == "backspace") then
 		-- do nothing
 	elseif ( key == "rshift" or
 			key == "lshift")  then
-			uppercase_ = true
+			self.uppercase = true
 	else
-		if (uppercase_) then
+		if (self.uppercase) then
 			-- convert to upper case
 			key = string.upper(key)
-			uppercase_ = false
+			self.uppercase = false
 		end
 
-		input = input .. key
-		if (not timer_on) then
+		self.input = self.input .. key
+		if (not self.timer_on) then
 			-- start timing on first keypress of new target
-			timer_on = true
-			stime = love.timer.getTime()
+			self.timer_on = true
+			self.stime = love.timer.getTime()
 		end
 	end
 end

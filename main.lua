@@ -21,12 +21,17 @@ require "button"
 require "title"
 require "lessonMenu"
 require "lessonInstruct"
+require "lesson"
+require "word"
+require "data_1a"
+require "data_1b"
 
 function love.load()
 
 	-- Resources
 	color = {	light_blue = {128,128,255},
 				bright_blue = {63,193,245},
+				light_green = {128,255,128},
 				black = {0,0,0},
 				white = {255,255,255},
 				overlay = {255,255,255,235} }
@@ -47,6 +52,8 @@ function love.load()
 
 	-- Variables
 	audio = true
+	wpm = 0		-- the result of last test
+	lesson = nil	-- the current lesson
 	state = Title.create() -- init game state
 
 	background = color.light_blue
