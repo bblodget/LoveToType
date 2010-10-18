@@ -20,6 +20,7 @@
 require "button"
 require "title"
 require "lessonMenu"
+require "lessonInstruct"
 
 function love.load()
 
