@@ -59,7 +59,7 @@ function LessonMenu.create()
 
 		sub1 = Button.createTextButton("Lesson 1-A    [home keys]",cx,yy),
 		sub2 = Button.createTextButton("Lesson 1-B    [e n g o]",cx,yy+(s*1)),
-		sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2)),
+		sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2),false),
 
 		back = Button.createTextButton("Back", cx, 550) 
 
@@ -107,41 +107,41 @@ function LessonMenu:mousepressed(x,y,button)
 				self.level = 1
 				self.button.sub1 = Button.createTextButton("Lesson 1-A    [home keys]",cx,yy)
 				self.button.sub2 = Button.createTextButton("Lesson 1-B    [e n g o]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2))
+				self.button.sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2),false)
 			elseif n == "two" then
 				self.level = 2
-				self.button.sub1 = Button.createTextButton("Lesson 2-A    [t i h c]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 2-B    [r u v p .]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 2 Review",cx,yy+(s*2))
+				self.button.sub1 = Button.createTextButton("Lesson 2-A    [t i h c]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 2-B    [r u v p .]",cx,yy+(s*1),false)
+				self.button.sub3 = Button.createTextButton("Lesson 2 Review",cx,yy+(s*2),false)
 			elseif n == "three" then
 				self.level = 3
-				self.button.sub1 = Button.createTextButton("Lesson 3-A    [q m x b :]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 3-B    [w y z ,]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 3 Review",cx,yy+(s*2))
+				self.button.sub1 = Button.createTextButton("Lesson 3-A    [q m x b :]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 3-B    [w y z ,]",cx,yy+(s*1),false)
+				self.button.sub3 = Button.createTextButton("Lesson 3 Review",cx,yy+(s*2),false)
 			elseif n == "four" then
 				self.level = 4
-				self.button.sub1 = Button.createTextButton("Lesson 4-A    [? ' / \"]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 4 Review   [r u v p .]",cx,yy+(s*1))
+				self.button.sub1 = Button.createTextButton("Lesson 4-A    [? ' / \"]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 4 Review   [r u v p .]",cx,yy+(s*1),false)
 				self.button.sub3 = nil
 			elseif n == "five" then
 				self.level = 5
-				self.button.sub1 = Button.createTextButton("Lesson 5-A    [0 ) 2 @]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 5-B    [1 ! 9 (]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 5 Review",cx,yy+(s*2))
+				self.button.sub1 = Button.createTextButton("Lesson 5-A    [0 ) 2 @]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 5-B    [1 ! 9 (]",cx,yy+(s*1),false)
+				self.button.sub3 = Button.createTextButton("Lesson 5 Review",cx,yy+(s*2),false)
 			elseif n == "six" then
 				self.level = 6
-				self.button.sub1 = Button.createTextButton("Lesson 6-A    [4 $ 8 *]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 6-B    [3 # 7 &]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 6 Review",cx,yy+(s*2))
+				self.button.sub1 = Button.createTextButton("Lesson 6-A    [4 $ 8 *]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 6-B    [3 # 7 &]",cx,yy+(s*1),false)
+				self.button.sub3 = Button.createTextButton("Lesson 6 Review",cx,yy+(s*2),false)
 			elseif n == "seven" then
 				self.level = 7
-				self.button.sub1 = Button.createTextButton("Lesson 7-A    [5 % \ -]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 7-B    [6 = +]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 7 Review",cx,yy+(s*2))
+				self.button.sub1 = Button.createTextButton("Lesson 7-A    [5 % \ -]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 7-B    [6 = +]",cx,yy+(s*1),false)
+				self.button.sub3 = Button.createTextButton("Lesson 7 Review",cx,yy+(s*2),false)
 			elseif n == "eight" then
 				self.level = 8
-				self.button.sub1 = Button.createTextButton("Lesson 8-A    [, < . >]",cx,yy)
-				self.button.sub2 = Button.createTextButton("Lesson 8 Review",cx,yy+(s*1))
+				self.button.sub1 = Button.createTextButton("Lesson 8-A    [, < . >]",cx,yy,false)
+				self.button.sub2 = Button.createTextButton("Lesson 8 Review",cx,yy+(s*1),false)
 				self.button.sub3 = nil
 			elseif n == "sub1" then
 				if (self.level == 1) then

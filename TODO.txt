@@ -1,10 +1,8 @@
 To Do List
 
+ - Update code to use Singleton objects when possible
  - Change letters to not have box and be BIGGER
  - Add ability for TAB and ENTER to select menu choices
- - Update lessons.lua to be OO style
- - Update text offsets so it works with love 0.6.2
- - Update Menus so it uses buttons
  - Write Lesson 1 Review 
  - Write Lessons 2 - 8
  - Write typing game
