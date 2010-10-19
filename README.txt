@@ -1,11 +1,25 @@
-Love To Type is a touch typing tutor written in Lua using
-the LÖVE 2D API.  This is my first program using LÖVE 2D.
+Introdcution:
 
-Love To Type is basically a clone of the TI-99/4a Touch
-Typing Tutor program from the early 1980s.  This is the
-program from which I learned touch typing.  I've been
-looking for touch typing software for my children but I
-have not found anything I like as well.  
+Love To Type is a touch typing tutor written in Lua
+using the LÖVE 2D API.  
+
+Love To Type is based on the TI-99/4a Touch Typing Tutor
+program from the early 1980s.  This is the program from
+which I learned touch typing.  I've been looking for
+touch typing software for my children but I have not
+found anything I like as well.  
+
+Installation:
+
+To use Love To Type you must first install LÖVE 0.6.2.
+Downloads for Mac, Linux and Windows are available at
+http://love2d.org/.  After LÖVE 0.6.2 has been installed
+you can download the latest version of the
+LoveToType.love file from the the download link at
+http://github.com/bblodget/LoveToType/.  Once the file
+had been downloaded, simply double-click it to run it.
+
+License:
 
 This program is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
