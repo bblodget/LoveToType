@@ -18,10 +18,10 @@
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
 function love.conf(t)
-	t.title = "Love To Type version 0.2"
+	t.title = "Love To Type version 0.3"
 	t.author = "Brandon Blodget"
 	t.screen.width = 800
 	t.screen.height = 600
-	t.version = 0.2
+	t.version = 0.3
 end
 
