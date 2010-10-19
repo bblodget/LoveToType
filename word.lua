@@ -27,50 +27,49 @@ Word.__index = Word
 -- rand: boolen.  True = random order, False = seq order
 -- words_per_line: how many words should be put on a line 
 function Word.create(word_list, info_list, rand, words_per_line)
-	local temp = {}
-	setmetatable(temp, Word)
+	local self = Word
 
-	temp.word_list = word_list
-	temp.info_list = info_list
-	temp.rand = rand
-	temp.words_per_line = words_per_line 
-	temp.entries_per_line = words_per_line / word_list.words_per_index
+	self.word_list = word_list
+	self.info_list = info_list
+	self.rand = rand
+	self.words_per_line = words_per_line 
+	self.entries_per_line = words_per_line / word_list.words_per_index
 
-	temp.index = 1
-	temp.info = ""
-	temp.target = ""
+	self.index = 1
+	self.info = ""
+	self.target = ""
 
-	temp.x_start = 0
+	self.x_start = 0
 
-	temp.wpm = 0
+	self.wpm = 0
 
-	temp.timer_on = false;
-	temp.total_time = 0
-	temp.total_words = 0
-	temp.stime = 0  
-	temp.etime = 0 
+	self.timer_on = false;
+	self.total_time = 0
+	self.total_words = 0
+	self.stime = 0  
+	self.etime = 0 
 
-	temp.uppercase = false;
+	self.uppercase = false;
 
-	temp.rep_count = 1
-	if (temp.rand) then
-		temp.max_count = 16/temp.entries_per_line
+	self.rep_count = 1
+	if (self.rand) then
+		self.max_count = 16/self.entries_per_line
 	else
-		temp.max_count = temp.word_list.size/temp.entries_per_line
+		self.max_count = self.word_list.size/self.entries_per_line
 	end
 
-	temp.input = ""
-	temp.line = 1
-	temp.line1 = ""
+	self.input = ""
+	self.line = 1
+	self.line1 = ""
 
 	-- set font, background and text color
 	love.graphics.setFont(font.large)
 	love.graphics.setBackgroundColor(unpack(color.light_green)) 
 	love.graphics.setColor(unpack(color.black)) 
 
-	temp.newTarget(temp)  -- get first target line
+	self:newTarget()  -- get first target line
 
-	return temp
+	return self
 end
 
 

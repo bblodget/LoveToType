@@ -22,15 +22,19 @@ LessonInstruct = {}
 LessonInstruct.__index = LessonInstruct
 
 function LessonInstruct.create()
-	local temp = {}
-	setmetatable(temp, LessonInstruct)
+	local self = LessonInstruct
 
-	temp.button = {
+	-- only need one instance of LessonInstruct
+	if (self.initialized) then
+		return self
+	end
+
+	self.button = {
 		title = Button.createTextButton("Lessons", 400, 120, false),
 		back = Button.createTextButton("Back", 400, 550) 
 	}
 
-	temp.instruct = 
+	self.instruct = 
 	
 		"Select a level and then select a lesson.  " ..
 		"Each lesson is designed to teach you 4 or 5 new keys.  " ..
@@ -41,13 +45,13 @@ function LessonInstruct.create()
 		"At the end of the lesson, your actual and target words per minute will be displayed." ..
 		"You can exit the lesson at any time by pressing the Escape key."
 
-	return temp
+	return self
 end
 
 
 function LessonInstruct:draw()
-	love.graphics.setBackgroundColor(unpack(background))
-	love.graphics.setColor(unpack(normal_text))
+	love.graphics.setBackgroundColor(unpack(color.light_blue))
+	love.graphics.setColor(unpack(color.black))
 
 	love.graphics.setFont(font["small"])
 

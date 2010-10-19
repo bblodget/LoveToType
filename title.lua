@@ -22,10 +22,14 @@ Title = {}
 Title.__index = Title
 
 function Title.create()
-	local temp = {}
-	setmetatable(temp, Title)
+	local self = Title
 
-	temp.button = {	
+	-- only need one instance of Title
+	if (self.initialized) then
+		return self
+	end
+
+	self.button = {	
 		logo = Button.createImageButton(graphics.logo, 320, 110),
 		title = Button.createTextButton("To Type", 430, 120, false),
 		lessons = Button.createTextButton("Lessons", 400, 250),
@@ -33,13 +37,16 @@ function Title.create()
 		quit = Button.createTextButton("Quit", 400, 350) 
 		}
 
-	temp.full_screen = false
-	return temp
+	self.full_screen = false
+
+	self.initialized = true
+
+	return self
 end
 
 
 function Title:draw()
-	love.graphics.setBackgroundColor(unpack(background))
+	love.graphics.setBackgroundColor(unpack(color.light_blue))
 
 	for n,b in pairs(self.button) do
 		b:draw()

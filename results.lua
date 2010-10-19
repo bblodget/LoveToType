@@ -26,6 +26,7 @@ Results.__index = Results
 -- actual_wpm:  The word per minute of previous exercies
 -- target_wpm.  The target word per minue
 function Results.create(name,isEnd,actual_wpm,target_wpm)
+	local self = Results
 
 	local good = {
 		"Way to go!",
@@ -39,19 +40,19 @@ function Results.create(name,isEnd,actual_wpm,target_wpm)
 		"More practice is needed."
 	}
 
-	Results.name = "End of\n" .. name
-	Results.isEnd = isEnd
+	self.name = "End of\n" .. name
+	self.isEnd = isEnd
 
 	if (actual_wpm >= target_wpm) then
-		Results.isGood = true
-		Results.message = good[math.random(# good)]
+		self.isGood = true
+		self.message = good[math.random(# good)]
 	else
-		Results.isGood = false
-		Results.message = bad[math.random(# bad)]
+		self.isGood = false
+		self.message = bad[math.random(# bad)]
 	end
 
-	Results.actual_wpm = "Actual\nWPM\n"..actual_wpm
-	Results.target_wpm = "Target\nWPM\n"..target_wpm
+	self.actual_wpm = "Actual\nWPM\n"..actual_wpm
+	self.target_wpm = "Target\nWPM\n"..target_wpm
 
 
 	-- set font, background and text color

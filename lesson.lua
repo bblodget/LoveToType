@@ -36,13 +36,12 @@ Lesson.__index = Lesson
 
 -- Creates the lesson for the given level data
 function Lesson.create(data)
-	local temp = {}
-	setmetatable(temp, Lesson)
+	local self = Lesson
 
-	temp.data = data
-	temp.step = 0
+	self.data = data
+	self.step = 0
 
-	return temp
+	return self
 end
 
 

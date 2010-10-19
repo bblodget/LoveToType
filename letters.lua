@@ -22,24 +22,23 @@ Letters.__index = Letters
 
 
 function Letters.create(letter)
-	local temp = {}
-	setmetatable(temp, Letters)
+	local self = Letters
 
-	temp.letter = letter
+	self.letter = letter
 
-	temp.index = math.random(letter.size)  -- index into letter array
-	temp.prev_index = index
-	temp.target = letter[temp.index]
-	temp.l_width = font.large:getWidth(temp.target)
-	temp.l_height = font.large:getHeight()
-	temp.count = 0
+	self.index = math.random(letter.size)  -- index into letter array
+	self.prev_index = index
+	self.target = letter[self.index]
+	self.l_width = font.large:getWidth(self.target)
+	self.l_height = font.large:getHeight()
+	self.count = 0
 
 	love.graphics.setBackgroundColor(unpack(color.purple)) 
 	love.graphics.setColor(unpack(color.white))  
 	love.graphics.setLineWidth( 3 )
 	love.graphics.setFont(font.large)
 
-	return temp
+	return self
 
 end
 

@@ -1,6 +1,5 @@
 To Do List
 
- - Update code to use Singleton objects when possible
  - Change letters to not have box and be BIGGER
  - Add ability for TAB and ENTER to select menu choices
  - Write Lesson 1 Review 

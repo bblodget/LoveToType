@@ -23,25 +23,28 @@ LessonMenu.__index = LessonMenu
 
 
 function LessonMenu.create()
-	local temp = {}
+	local self = LessonMenu
 
-	setmetatable(temp, LessonMenu)
+	-- only need one instance of LessonMenu
+	if (self.initialized) then
+		return self
+	end
 
-	temp.cx = 400
-	temp.x = 200
-	temp.y = 250
-	temp.xx = temp.x + 100
-	temp.yy = temp.y + 100
-	temp.s = 50
+	self.cx = 400
+	self.x = 200
+	self.y = 250
+	self.xx = self.x + 100
+	self.yy = self.y + 100
+	self.s = 50
 
-	local cx = temp.cx
-	local x = temp.x
-	local y = temp.y
-	local xx = temp.xx
-	local yy = temp.yy
-	local s = temp.s
+	local cx = self.cx
+	local x = self.x
+	local y = self.y
+	local xx = self.xx
+	local yy = self.yy
+	local s = self.s
 
-	temp.button = {
+	self.button = {
 		title = Button.createTextButton("Lessons", 400, 120, false),
 
 		instruct = Button.createTextButton("Instructions", cx, y-50),
@@ -65,21 +68,23 @@ function LessonMenu.create()
 
 	}
 
-	temp.level = 1
+	self.level = 1
 
-	return temp
+	self.initialized = true
+
+	return self
 end
 
 
 function LessonMenu:draw()
-	love.graphics.setBackgroundColor(unpack(background))
+	love.graphics.setBackgroundColor(unpack(color.light_blue))
 
 	for n,b in pairs(self.button) do
 		b:draw()
 	end
 
 	-- draw line under selected level
-	love.graphics.setColor(unpack(hover_text))
+	love.graphics.setColor(unpack(color.bright_blue))
 	love.graphics.setLine(4, "rough")
 	local l = self.level - 1
 	love.graphics.line((self.xx-15)+((l)*self.s),(self.y+5),(self.xx+15)+((l)*self.s),(self.y+5))

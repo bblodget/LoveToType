@@ -58,12 +58,7 @@ function love.load()
 	audio = true
 	wpm = 0		-- the result of last test
 	lesson = nil	-- the current lesson
-	state = Title.create() -- init game state
-
-	background = color.light_blue
-	normal_text = color.black
-	hover_text = color.bright_blue
-	overlay = color.overlay
+	state = Title.create() -- start the program with title screen.
 
 end
 

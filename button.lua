@@ -64,13 +64,13 @@ function Button:draw()
 	if (self.btype =="text") then
 		love.graphics.setFont(font["large"])
 		if (self.hover and self.enable) then 
-			love.graphics.setColor(unpack(hover_text))
+			love.graphics.setColor(unpack(color.bright_blue))
 		else 
-			love.graphics.setColor(unpack(normal_text)) 
+			love.graphics.setColor(unpack(color.black)) 
 		end
 		love.graphics.print(self.text, self.x, self.y)
 	elseif (self.btype == "image") then
-		love.graphics.setColor(unpack(overlay))  
+		love.graphics.setColor(unpack(color.overlay))  
 		love.graphics.draw(self.image, self.x, self.y)
 	end
 	
