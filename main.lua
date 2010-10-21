@@ -27,6 +27,7 @@ require "letters"
 require "results"
 require "data_1a"
 require "data_1b"
+require "game"
 
 function love.load()
 
@@ -45,7 +46,12 @@ function love.load()
 				huge = love.graphics.newFont(72),
 				small = love.graphics.newFont(22) }
 
-	graphics = {logo = love.graphics.newImage("images/love-ball.png")}
+	graphics = {
+		logo = love.graphics.newImage("images/love-ball.png"),
+		cloud = love.graphics.newImage("images/cloud_plain.png"),
+		plane = love.graphics.newImage("images/airplane_happy2.png"),
+		sun = love.graphics.newImage("images/sun.png")
+	}
 				
 	sound =	{	beep = love.audio.newSource("sounds/button-pressed.ogg", "static")}
 
@@ -58,6 +64,7 @@ function love.load()
 	audio = true
 	wpm = 0		-- the result of last test
 	lesson = nil	-- the current lesson
+
 	state = Title.create() -- start the program with title screen.
 
 end

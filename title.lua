@@ -33,8 +33,9 @@ function Title.create()
 		logo = Button.createImageButton(graphics.logo, 320, 110),
 		title = Button.createTextButton("To Type", 430, 120, false),
 		lessons = Button.createTextButton("Lessons", 400, 250),
-		screen = Button.createTextButton("Full Screen", 400, 300),
-		quit = Button.createTextButton("Quit", 400, 350) 
+		game = Button.createTextButton("Game", 400, 300),
+		screen = Button.createTextButton("Full Screen", 400, 350),
+		quit = Button.createTextButton("Quit", 400, 400) 
 		}
 
 	self.full_screen = false
@@ -67,6 +68,8 @@ function Title:mousepressed(x,y,button)
 		if b:mousepressed(x,y,button) then
 			if n == "lessons" then
 				state = LessonMenu.create()
+			elseif n == "game" then
+				state = Game.create(data_1a.nonsense, data_1a.short,data_1a.long)
 			elseif n == "screen" then
 				self:toggleScreen()
 			elseif n == "quit" then
@@ -88,10 +91,10 @@ function Title:toggleScreen()
 
 	if (self.full_screen) then
 		self:windowScreen()
-		self.button.screen = Button.createTextButton("Full Screen", 400, 300)
+		self.button.screen = Button.createTextButton("Full Screen", 400, 350)
 	else
 		self:fullScreen()
-		self.button.screen = Button.createTextButton("Windowed Screen", 400, 300)
+		self.button.screen = Button.createTextButton("Windowed Screen", 400, 350)
 	end
 
 end
