@@ -1,0 +1,17 @@
+airplane_happy.png
+	source: open clip art
+	url: http://www.openclipart.org/detail/31399
+	license: Public Domain
+cloud_plain.png
+	source: LOVE 0.6.2 release, passing clouds demo
+	url: http://love2d.org
+	license: ZLIB/libpng
+love-ball.png
+	source: LOVE 0.6.2 release, lovalanche demo
+	url: http://love2d.org
+	license: ZLIB/libpng
+sun.png
+	source: open clip art
+	url: http://www.openclipart.org/detail/74497
+	license: Public Domain
+
