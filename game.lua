@@ -33,6 +33,11 @@ function Game.create(nonsense_words, short_words, long_words)
 
 	self.index = 0
 	self.prev_index = 0
+	self.score = 0
+	self.hits = 0
+	self.uppercase = false
+	self.input = ""
+	self.num_letters = 0
 
 	self.word_list = self.short_words
 
@@ -60,8 +65,22 @@ function Game.create(nonsense_words, short_words, long_words)
 	love.graphics.setBackgroundColor(unpack(color.light_blue))
 	love.graphics.setColor(unpack(color.white))
 	love.graphics.setFont(font.large)
+	love.graphics.setLineWidth(3)
+
+	self:initBox()
 
 	return self
+
+end
+
+-- Initialize possition for typed word box
+function Game:initBox()
+	local max_str = "abcdefghj"
+	love.graphics.setFont(font.large)
+	self.rw = font.large:getWidth(max_str)
+	self.rh = font.large:getHeight() * 2
+	self.rx = 400 - (self.rw/2)
+	self.ry = 500 - (self.rh / 1.5)
 
 end
 
@@ -83,7 +102,8 @@ function Game:draw()
 	local wAdjust = ((graphics.sun:getWidth() * 0.25) / 3)
 	local hAdjust = (graphics.sun:getHeight() * 0.25) / 2
 
-	-- text
+	-- word or sun
+	love.graphics.setFont(font.large)
 	for i,w in ipairs(self.words) do
 		if (w.state == "word") then
 			love.graphics.setColor(unpack(color.black))
@@ -100,8 +120,26 @@ function Game:draw()
 		love.graphics.draw(o.img, o.x, o.y,0,o.scale)
 	end
 
+	-- score
+	love.graphics.setFont(font.default)
+	love.graphics.setColor(unpack(color.black))
+	local t_score = "score\n" .. self.score
+	love.graphics.printf(t_score, 40, 500,800,'left')
+
+	-- hits
+	local t_hits = "hit words\n" .. self.hits
+	love.graphics.printf(t_hits, 650, 500,800,'left')
+
+	-- draw rect for typed word
+	love.graphics.rectangle("line", self.rx, self.ry, self.rw, self.rh)
+
+	-- typed word
+	love.graphics.setFont(font.large)
+	love.graphics.printf(self.input, self.rx+10 ,500,800, 'left')
+
 
 end
+
 
 function Game:update(dt)
 
@@ -156,6 +194,28 @@ end
 function Game:keypressed(key)
 	if key == "escape" then
 		state = Title.create()
+	elseif key == "return" then
+		self.input = ""
+		self.num_letters = 0
+	elseif (key == "backspace") then
+		-- do nothing
+	elseif ( key == "rshift" or
+			key == "lshift")  then
+			self.uppercase = true
+	else
+		if (self.uppercase) then
+			-- convert to upper case
+			key = string.upper(key)
+			self.uppercase = false
+		end
+
+		self.input = self.input .. key
+		self.num_letters = self.num_letters + 1
+		if (self.num_letters == 8) then
+			self.input=""
+			self.num_letters = 0
+		end
+
 	end
 end
 
