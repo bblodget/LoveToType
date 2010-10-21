@@ -1,10 +1,15 @@
 To Do List
 
- - Change letters to not have box and be BIGGER
- - Add ability for TAB and ENTER to select menu choices
+ - In game seperate the two line of words more
+ - Edit the game graphics to natively be the correct size
+ - Add sound for when the plane hits the word
+ - When plane hits word have them wiggle a little bit
+ - Add menu to select game level
+ - In data files have only one nonsense word per entry (like words)
  - Write Lesson 1 Review 
  - Write Lessons 2 - 8
- - Write typing game
+ - Add ability for TAB and ENTER to select menu choices
+
 
 
 

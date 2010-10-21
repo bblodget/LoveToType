@@ -33,6 +33,7 @@ function Game.create(nonsense_words, short_words, long_words)
 
 	self.score = 0
 	self.hits = 0
+	self.max_hits = 5
 	self.uppercase = false
 	self.input = ""
 	self.num_letters = 0
@@ -42,6 +43,13 @@ function Game.create(nonsense_words, short_words, long_words)
 	self.y1 = 120
 	self.y2 = 220
 	self.pos = 0  -- last word position 1..6
+	self.game_over = false
+
+	self.button = {
+		game_over = Button.createTextButton("Game Over", 400, 250),
+		again = Button.createTextButton("Again", 300, 350),
+		back = Button.createTextButton("Back", 500, 350) 
+	}
 
 	self.plane = { img = graphics.plane, x=0, y=self.y1, xSpeed=120, scale=0.25 };
 	self.cloud = { img = graphics.cloud, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
@@ -109,22 +117,33 @@ function Game:draw()
 	local wAdjust = ((graphics.sun:getWidth() * 0.25) / 3)
 	local hAdjust = (graphics.sun:getHeight() * 0.25) / 2
 
-	-- word or sun
-	love.graphics.setFont(font.large)
-	for i,w in ipairs(self.words) do
-		if (w.state == "word") then
-			love.graphics.setColor(unpack(color.black))
-			love.graphics.printf(w.word, w.x, w.y,800,'left')
-		elseif (w.state == "sun") then
-			love.graphics.setColor(unpack(color.overlay))
-			love.graphics.draw(graphics.sun, w.x -wAdjust, w.y -hAdjust, 0, 0.25)
-		end
-	end
+	if (not self.game_over) then
 
-	-- objects
-	love.graphics.setColor(unpack(color.white))
-	for i,o in ipairs(self.objects) do
-		love.graphics.draw(o.img, o.x, o.y,0,o.scale)
+		-- word or sun
+		love.graphics.setFont(font.large)
+		for i,w in ipairs(self.words) do
+			if (w.state == "word") then
+				love.graphics.setColor(unpack(color.black))
+				love.graphics.printf(w.word, w.x, w.y,800,'left')
+			elseif (w.state == "sun") then
+				love.graphics.setColor(unpack(color.overlay))
+				love.graphics.draw(graphics.sun, w.x -wAdjust, w.y -hAdjust, 0, 0.25)
+			end
+		end
+
+		-- objects
+		love.graphics.setColor(unpack(color.white))
+		for i,o in ipairs(self.objects) do
+			love.graphics.draw(o.img, o.x, o.y,0,o.scale)
+		end
+
+	else
+		-- buttons for game over
+		love.graphics.setFont(font.large)
+		for n,b in pairs(self.button) do
+			b:draw()
+		end
+
 	end
 
 	-- score
@@ -135,7 +154,7 @@ function Game:draw()
 
 	-- hits
 	local t_hits = "hit words\n" .. self.hits
-	love.graphics.printf(t_hits, 650, 500,800,'left')
+	love.graphics.printf(t_hits .. "/" .. self.max_hits, 650, 500,800,'left')
 
 	-- draw rect for typed word
 	love.graphics.rectangle("line", self.rx, self.ry, self.rw, self.rh)
@@ -224,11 +243,37 @@ function Game:update(dt)
 			self.words[6].state="word"
 		end
 	end
+
+	-- check if game is over
+	if (self.hits >= self.max_hits) then
+		-- freeze the moving things
+		self.plane.xSpeed = 0
+		self.cloud.xSpeed = 0
+		self.game_over = true
+	end
+
+	-- update game over buttons
+	if (self.game_over) then
+		for n,b in pairs(self.button) do
+			b:update(dt)
+		end
+	end
+
 end
 
 
 function Game:mousepressed(x,y,button)
-	return
+
+	for n,b in pairs(self.button) do
+		if b:mousepressed(x,y,button) then
+			if n == "back" then
+				state = Title.create()
+			elseif n == "again" then
+				state = Game.create(self.nonsense_words,self.short_words,self.long_words)
+			end
+		end
+	end
+
 end
 
 function Game:keypressed(key)
@@ -239,6 +284,8 @@ function Game:keypressed(key)
 	if key == "escape" then
 		state = Title.create()
 	elseif key == "return" then
+		if (game_over) then return end
+
 		love.audio.stop()
 		love.audio.play(sound.beep)
 
@@ -259,6 +306,8 @@ function Game:keypressed(key)
 			key == "lshift")  then
 			self.uppercase = true
 	else
+		if (game_over) then return end
+
 		if (self.uppercase) then
 			-- convert to upper case
 			key = string.upper(key)
