@@ -31,8 +31,6 @@ function Game.create(nonsense_words, short_words, long_words)
 	self.short_words = short_words
 	self.long_words = long_words
 
-	self.index = 0
-	self.prev_index = 0
 	self.score = 0
 	self.hits = 0
 	self.uppercase = false
@@ -43,6 +41,7 @@ function Game.create(nonsense_words, short_words, long_words)
 
 	self.y1 = 120
 	self.y2 = 220
+	self.pos = 0  -- last word position 1..6
 
 	self.plane = { img = graphics.plane, x=0, y=self.y1, xSpeed=120, scale=0.25 };
 	self.cloud = { img = graphics.cloud, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
@@ -54,12 +53,12 @@ function Game.create(nonsense_words, short_words, long_words)
 	}
 
 	self.words = {
-		{ word = self:randomWord(), x=200, y=150, state="none"},
-		{ word = self:randomWord(), x=400, y=175, state="none"},
-		{ word = self:randomWord(), x=600, y=200, state="none"},
-		{ word = self:randomWord(), x=200, y=250, state="none"},
-		{ word = self:randomWord(), x=400, y=275, state="none"},
-		{ word = self:randomWord(), x=600, y=300, state="none"}
+		{ word = "", x=200, y=150, state="none"},
+		{ word = "", x=400, y=175, state="none"},
+		{ word = "", x=600, y=200, state="none"},
+		{ word = "", x=200, y=250, state="none"},
+		{ word = "", x=400, y=275, state="none"},
+		{ word = "", x=600, y=300, state="none"}
 	}
 
 	love.graphics.setBackgroundColor(unpack(color.light_blue))
@@ -85,16 +84,24 @@ function Game:initBox()
 end
 
 -- Return random word from the word_list.
--- Make sure we don't choose the same word twice in a row.
+-- Make sure the word has not already been displayed 
 function Game:randomWord()
 	local s = self
+	local index
+	local new_word = ""
+	local done = false
 
-	while (s.index == s.prev_index) do
-		s.index =math.random(s.word_list.size)
+	while (not done) do
+		index =math.random(s.word_list.size)
+		new_word = s.word_list[index]
+		done =true
+		for i,w in ipairs(self.words) do
+			if (new_word == w.word) then
+				done=false
+			end
+		end
 	end
-
-	s.prev_index = s.index
-	return s.word_list[s.index]
+	return new_word
 end
 
 
@@ -163,20 +170,57 @@ function Game:update(dt)
 	-- show word?
 	if (self.plane.y == self.y1) then
 		-- top line
-		if (self.plane.x > 200 and self.plane.x < 210) then
+		if (self.plane.x > 200 and self.plane.x < 210 and self.pos ~= 1) then
+			self.pos = 1
+			self.pos = 1
+			if (self.words[1].state=="word") then
+				self.hits = self.hits + 1
+			else
+				self.words[1].word = self:randomWord()
+			end
 			self.words[1].state="word"
-		elseif (self.plane.x > 400 and self.plane.x < 410) then
+		elseif (self.plane.x > 400 and self.plane.x < 410 and self.pos ~= 2) then
+			self.pos = 2
+			if (self.words[2].state=="word") then
+				self.hits = self.hits + 1
+			else
+				self.words[2].word = self:randomWord()
+			end
 			self.words[2].state="word"
-		elseif (self.plane.x > 600 and self.plane.x < 610) then
+		elseif (self.plane.x > 600 and self.plane.x < 610 and self.pos ~= 3) then
+			self.pos = 3
+			if (self.words[3].state=="word") then
+				self.hits = self.hits + 1
+			else
+				self.words[3].word = self:randomWord()
+			end
 			self.words[3].state="word"
 		end
 	else
 		-- bottom line
-		if (self.plane.x > 200 and self.plane.x < 210) then
+		if (self.plane.x > 200 and self.plane.x < 210 and self.pos ~= 4) then
+			self.pos = 4
+			if (self.words[4].state=="word") then
+				self.hits = self.hits + 1
+			else
+				self.words[4].word = self:randomWord()
+			end
 			self.words[4].state="word"
-		elseif (self.plane.x > 400 and self.plane.x < 410) then
+		elseif (self.plane.x > 400 and self.plane.x < 410 and self.pos ~= 5) then
+			self.pos = 5
+			if (self.words[5].state=="word") then
+				self.hits = self.hits + 1
+			else
+				self.words[5].word = self:randomWord()
+			end
 			self.words[5].state="word"
-		elseif (self.plane.x > 600 and self.plane.x < 610) then
+		elseif (self.plane.x > 600 and self.plane.x < 610 and self.pos ~= 6) then
+			self.pos = 6
+			if (self.words[6].state=="word") then
+				self.hits = self.hits + 1
+			else
+				self.words[6].word = self:randomWord()
+			end
 			self.words[6].state="word"
 		end
 	end
@@ -195,8 +239,20 @@ function Game:keypressed(key)
 	if key == "escape" then
 		state = Title.create()
 	elseif key == "return" then
+		love.audio.stop()
+		love.audio.play(sound.beep)
+
+		-- check if input matches a displayed word
+		for i,w in ipairs(self.words)do
+			if (w.word == self.input) then
+				w.state="sun"
+				self.score = self.score + self.num_letters
+			end
+		end
+
 		self.input = ""
 		self.num_letters = 0
+
 	elseif (key == "backspace") then
 		-- do nothing
 	elseif ( key == "rshift" or
@@ -214,6 +270,8 @@ function Game:keypressed(key)
 		if (self.num_letters == 8) then
 			self.input=""
 			self.num_letters = 0
+			love.audio.stop()
+			love.audio.play(sound.beep)
 		end
 
 	end
