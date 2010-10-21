@@ -38,7 +38,7 @@ function Game.create(nonsense_words, short_words, long_words)
 	self.input = ""
 	self.num_letters = 0
 
-	self.word_list = self.short_words
+	self.word_list = self.nonsense_words
 
 	self.y1 = 120
 	self.y2 = 220
@@ -46,7 +46,7 @@ function Game.create(nonsense_words, short_words, long_words)
 	self.game_over = false
 
 	self.button = {
-		game_over = Button.createTextButton("Game Over", 400, 250),
+		game_over = Button.createTextButton("Game Over", 400, 250,false),
 		again = Button.createTextButton("Again", 300, 350),
 		back = Button.createTextButton("Back", 500, 350) 
 	}
