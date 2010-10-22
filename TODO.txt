@@ -1,5 +1,7 @@
 To Do List
 
+ - Maybe add more gradual start to game.  Maybe start with two
+   or three letters and add one each time through
  - In data files have only one nonsense word per entry (like words)
  - In game seperate the two line of words more
  - Have the game increase in difficulty as game goes on

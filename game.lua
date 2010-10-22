@@ -51,7 +51,7 @@ function Game.create(nonsense_words, short_words, long_words)
 		back = Button.createTextButton("Back", 500, 350) 
 	}
 
-	self.plane = { img = graphics.plane, x=0, y=self.y1, xSpeed=120, scale=0.25 };
+	self.plane = { img = graphics.plane, x=0, y=self.y1, xSpeed=60, scale=0.25 };
 	self.cloud = { img = graphics.cloud, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
 
 
