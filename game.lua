@@ -40,8 +40,8 @@ function Game.create(nonsense_words, short_words, long_words)
 
 	self.word_list = self.nonsense_words
 
-	self.y1 = 120
-	self.y2 = 220
+	self.y1 = 100
+	self.y2 = 250
 	self.pos = 0  -- last word position 1..6
 	self.game_over = false
 
@@ -61,12 +61,12 @@ function Game.create(nonsense_words, short_words, long_words)
 	}
 
 	self.words = {
-		{ word = "", x=200, y=150, state="none"},
-		{ word = "", x=400, y=175, state="none"},
-		{ word = "", x=600, y=200, state="none"},
-		{ word = "", x=200, y=250, state="none"},
-		{ word = "", x=400, y=275, state="none"},
-		{ word = "", x=600, y=300, state="none"}
+		{ word = "", x=200, y=self.y1+30, state="none"},
+		{ word = "", x=400, y=self.y1+55, state="none"},
+		{ word = "", x=600, y=self.y1+80, state="none"},
+		{ word = "", x=200, y=self.y2+30, state="none"},
+		{ word = "", x=400, y=self.y2+55, state="none"},
+		{ word = "", x=600, y=self.y2+80, state="none"}
 	}
 
 	love.graphics.setBackgroundColor(unpack(color.light_blue))
