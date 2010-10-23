@@ -1,10 +1,7 @@
 To Do List
 
- - Adjust speed after every line?
  - Add min value for random word so the first words are not repeated
    over and over again
- - Add routines for speedup and slowdown of plane.  Check that
-   speeds are with in a bounds.
  - Add speed at the bottom
  - Maybe the game would work better as time limited. Add a time
    limit.

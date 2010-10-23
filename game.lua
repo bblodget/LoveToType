@@ -38,6 +38,7 @@ function Game.create(data)
 	self.input = ""
 	self.num_letters = 0
 	self.last_pos = 0   -- the last word pos of plane
+	self.min_index = 1	-- min index for choosing random word from word_list
 
 	self.word_list = {}
 
@@ -127,7 +128,7 @@ function Game:randomWord()
 	local done = false
 
 	while (not done) do
-		index =math.random(s.word_list.size)
+		index =math.random(s.min_index, s.word_list.size)
 		new_word = s.word_list[index]
 		done =true
 		--[[
@@ -237,13 +238,19 @@ function Game:update(dt)
 		self.plane.line, self.cloud.line = self.cloud.line, self.plane.line
 
 		self.line_count = self.line_count + 1
-		if (self.line_count == 4) then
+		if (self.line_count == 2) then
 			-- add more active words
 			self.line_count = 0
+			self:changePlaneSpeed(-10)  -- slow down a little for new words
 			self.word_list.size = self.word_list.size + 2
 			if (self.word_list.size > self.word_list.max_size) then
-				self.word_list.size = self.word_List.max_size
+				self.word_list.size = self.word_list.max_size
 			end
+			if (self.word_list.size  > 5) then
+				self.min_index = self.word_list.size - 5
+			end
+			print("min_index: " .. self.min_index)
+			print("max_index: " .. self.word_list.size)
 		end
 
 		-- count how many suns are on the screen
