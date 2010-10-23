@@ -27,9 +27,15 @@ Game.__index = Game
 function Game.create(data)
 	local self = Game
 
+	self.data = data
 	self.nonsense_words = data.nonsense
 	self.short_words = data.short
 	self.long_words = data.long
+
+	self.START_TIME = 120 -- seconds
+	self.time_left = self.START_TIME
+	self.time = 0		-- counts seconds since start of game
+	self.timer_start = love.timer.getTime()
 
 	self.score = 0
 	self.hits = 0
@@ -204,8 +210,12 @@ function Game:draw()
 	love.graphics.printf(t_score, 40, 500,800,'left')
 
 	-- hits
-	local t_hits = "hit words\n" .. self.hits
-	love.graphics.printf(t_hits .. "/" .. self.max_hits, 650, 500,800,'left')
+	--local t_hits = "hit words\n" .. self.hits
+	--love.graphics.printf(t_hits .. "/" .. self.max_hits, 650, 500,800,'left')
+
+	-- time
+	love.graphics.printf("time\n" .. self.time_left, 650, 500,800,'left')
+
 
 	-- draw rect for typed word
 	love.graphics.rectangle("line", self.rx, self.ry, self.rw, self.rh)
@@ -229,6 +239,15 @@ function Game:update(dt)
 	if (self.cloud.x < -200) then
 		self.cloud.x = 800
 	end
+
+	-- update timers
+	if (not self.game_over) then
+		local timer_end = 0
+		timer_end = love.timer.getTime()
+		self.time = math.floor(timer_end - self.timer_start)
+		self.time_left = self.START_TIME - self.time
+	end
+
 
 	-- check plane off screen to the right
 	if (self.plane.x > 805) then
@@ -292,7 +311,8 @@ function Game:update(dt)
 	end
 
 	-- check if game is over
-	if (self.hits >= self.max_hits) then
+	--if (self.hits >= self.max_hits) then
+	if (self.time_left <= 0) then
 		-- freeze the moving things
 		self.plane.xSpeed = 0
 		self.cloud.xSpeed = 0
@@ -316,7 +336,7 @@ function Game:mousepressed(x,y,button)
 			if n == "back" then
 				state = Title.create()
 			elseif n == "again" then
-				state = Game.create(data)
+				state = Game.create(self.data)
 			end
 		end
 	end

@@ -1,7 +1,5 @@
 To Do List
 
- - Add min value for random word so the first words are not repeated
-   over and over again
  - Add speed at the bottom
  - Maybe the game would work better as time limited. Add a time
    limit.
