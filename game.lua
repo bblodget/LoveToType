@@ -142,6 +142,27 @@ function Game:randomWord()
 end
 
 
+-- changes the speed of the plane
+function Game:changePlaneSpeed(delta)
+	local min_speed=60
+	local max_speed=300
+
+	self.plane.xSpeed = self.plane.xSpeed + delta
+
+	if (self.plane.xSpeed > max_speed) then
+		self.plane.xSpeed = max_speed
+	end
+
+	if (self.plane.xSpeed < min_speed) then
+		self.plane.xSpeed = min_speed
+	end
+
+	print("speed: " .. self.plane.xSpeed)
+
+
+end
+
+
 function Game:draw()
 	local wAdjust = ((graphics.sun:getWidth() * 0.25) / 3)
 	local hAdjust = (graphics.sun:getHeight() * 0.25) / 2
@@ -234,12 +255,12 @@ function Game:update(dt)
 		end
 
 		-- adjust speed
-		if (suns >= 6) then
-			self.plane.xSpeed=self.plane.xSpeed + 20
+		if (suns >= 5) then
+			self:changePlaneSpeed(20)
 		end
 
 		if (suns <= 1) then
-			self.plane.xSpeed=self.plane.xSpeed - 20
+			self:changePlaneSpeed(-20)
 		end
 
 	end
@@ -253,7 +274,7 @@ function Game:update(dt)
 			self.last_pos = i
 			if (w.state=="word") then
 				self.hits = self.hits + 1
-				self.plane.xSpeed=self.plane.xSpeed - 5  -- slow down plane
+				self:changePlaneSpeed(-10)  -- slow plane down
 				w.word = ""
 				w.state = "none"
 			else

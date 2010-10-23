@@ -1,9 +1,13 @@
 To Do List
 
- - cleanup the show word code
- - If the plane bumps into a word the word disappears
+ - Adjust speed after every line?
+ - Add min value for random word so the first words are not repeated
+   over and over again
+ - Add routines for speedup and slowdown of plane.  Check that
+   speeds are with in a bounds.
  - Add speed at the bottom
- - Maybe the game would work better as time limited.
+ - Maybe the game would work better as time limited. Add a time
+   limit.
  - Add menu to select game level
  - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
