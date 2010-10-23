@@ -1,13 +1,8 @@
 To Do List
 
+ - cleanup the show word code
+ - If the plane bumps into a word the word disappears
  - Add speed at the bottom
- - Pass in the level data object.  Create one long
-   list with all the nonsense, short and long
-   words.  Add more words as time goes on. Speed
-   up the plane as well.
- - Maybe add more gradual start to game.  Maybe start with two
-   or three letters and add one each time through
- - Have the game increase in difficulty as game goes on
  - Maybe the game would work better as time limited.
  - Add menu to select game level
  - Edit the game graphics to natively be the correct size

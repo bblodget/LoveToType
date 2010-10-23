@@ -37,6 +37,7 @@ function Game.create(data)
 	self.uppercase = false
 	self.input = ""
 	self.num_letters = 0
+	self.last_pos = 0   -- the last word pos of plane
 
 	self.word_list = {}
 
@@ -46,7 +47,6 @@ function Game.create(data)
 
 	self.y1 = 100
 	self.y2 = 250
-	self.pos = 0  -- last word position 1..6
 	self.game_over = false
 	self.line_count = 0  -- count of how many lines the plane has flown over
 
@@ -56,8 +56,8 @@ function Game.create(data)
 		back = Button.createTextButton("Back", 500, 350) 
 	}
 
-	self.plane = { img = graphics.plane, x=0, y=self.y1, xSpeed=60, scale=0.25 };
-	self.cloud = { img = graphics.cloud, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
+	self.plane = { img = graphics.plane, line=1, x=0, y=self.y1, xSpeed=60, scale=0.25 };
+	self.cloud = { img = graphics.cloud, line=2, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
 
 
 	self.objects = {
@@ -66,12 +66,12 @@ function Game.create(data)
 	}
 
 	self.words = {
-		{ word = "", x=200, y=self.y1+30, state="none"},
-		{ word = "", x=400, y=self.y1+55, state="none"},
-		{ word = "", x=600, y=self.y1+80, state="none"},
-		{ word = "", x=200, y=self.y2+30, state="none"},
-		{ word = "", x=400, y=self.y2+55, state="none"},
-		{ word = "", x=600, y=self.y2+80, state="none"}
+		{ word = "", line=1, x=200, y=self.y1+30, state="none"},
+		{ word = "", line=1, x=400, y=self.y1+55, state="none"},
+		{ word = "", line=1, x=600, y=self.y1+80, state="none"},
+		{ word = "", line=2, x=200, y=self.y2+30, state="none"},
+		{ word = "", line=2, x=400, y=self.y2+55, state="none"},
+		{ word = "", line=2, x=600, y=self.y2+80, state="none"}
 	}
 
 	love.graphics.setBackgroundColor(unpack(color.light_blue))
@@ -213,6 +213,7 @@ function Game:update(dt)
 		self.plane.x = -195
 		self.cloud.x = 800
 		self.plane.y, self.cloud.y = self.cloud.y, self.plane.y
+		self.plane.line, self.cloud.line = self.cloud.line, self.plane.line
 
 		self.line_count = self.line_count + 1
 		if (self.line_count == 4) then
@@ -233,71 +234,32 @@ function Game:update(dt)
 		end
 
 		-- adjust speed
-		if (suns >= 5) then
+		if (suns >= 6) then
 			self.plane.xSpeed=self.plane.xSpeed + 20
 		end
 
-		if (suns <= 2) then
+		if (suns <= 1) then
 			self.plane.xSpeed=self.plane.xSpeed - 20
 		end
 
 	end
 
-	-- show word?
-	if (self.plane.y == self.y1) then
-		-- top line
-		if (self.plane.x > 200 and self.plane.x < 210 and self.pos ~= 1) then
-			self.pos = 1
-			self.pos = 1
-			if (self.words[1].state=="word") then
+	-- check if plane is over a word posiiton
+	local px = self.plane.x
+	local pl = self.plane.line
+
+	for i, w in ipairs(self.words) do
+		if (px > w.x and px < w.x+10 and pl==w.line and self.last_pos ~= i) then
+			self.last_pos = i
+			if (w.state=="word") then
 				self.hits = self.hits + 1
+				self.plane.xSpeed=self.plane.xSpeed - 5  -- slow down plane
+				w.word = ""
+				w.state = "none"
 			else
-				self.words[1].word = self:randomWord()
+				w.word = self:randomWord()
+				w.state = "word"
 			end
-			self.words[1].state="word"
-		elseif (self.plane.x > 400 and self.plane.x < 410 and self.pos ~= 2) then
-			self.pos = 2
-			if (self.words[2].state=="word") then
-				self.hits = self.hits + 1
-			else
-				self.words[2].word = self:randomWord()
-			end
-			self.words[2].state="word"
-		elseif (self.plane.x > 600 and self.plane.x < 610 and self.pos ~= 3) then
-			self.pos = 3
-			if (self.words[3].state=="word") then
-				self.hits = self.hits + 1
-			else
-				self.words[3].word = self:randomWord()
-			end
-			self.words[3].state="word"
-		end
-	else
-		-- bottom line
-		if (self.plane.x > 200 and self.plane.x < 210 and self.pos ~= 4) then
-			self.pos = 4
-			if (self.words[4].state=="word") then
-				self.hits = self.hits + 1
-			else
-				self.words[4].word = self:randomWord()
-			end
-			self.words[4].state="word"
-		elseif (self.plane.x > 400 and self.plane.x < 410 and self.pos ~= 5) then
-			self.pos = 5
-			if (self.words[5].state=="word") then
-				self.hits = self.hits + 1
-			else
-				self.words[5].word = self:randomWord()
-			end
-			self.words[5].state="word"
-		elseif (self.plane.x > 600 and self.plane.x < 610 and self.pos ~= 6) then
-			self.pos = 6
-			if (self.words[6].state=="word") then
-				self.hits = self.hits + 1
-			else
-				self.words[6].word = self:randomWord()
-			end
-			self.words[6].state="word"
 		end
 	end
 
@@ -326,7 +288,7 @@ function Game:mousepressed(x,y,button)
 			if n == "back" then
 				state = Title.create()
 			elseif n == "again" then
-				state = Game.create(self.nonsense_words,self.short_words,self.long_words)
+				state = Game.create(data)
 			end
 		end
 	end
