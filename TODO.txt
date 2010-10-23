@@ -1,5 +1,6 @@
 To Do List
 
+ - Add speed at the bottom
  - Pass in the level data object.  Create one long
    list with all the nonsense, short and long
    words.  Add more words as time goes on. Speed

@@ -24,12 +24,12 @@ Game = {}
 Game.__index = Game
 
 
-function Game.create(nonsense_words, short_words, long_words)
+function Game.create(data)
 	local self = Game
 
-	self.nonsense_words = nonsense_words
-	self.short_words = short_words
-	self.long_words = long_words
+	self.nonsense_words = data.nonsense
+	self.short_words = data.short
+	self.long_words = data.long
 
 	self.score = 0
 	self.hits = 0
@@ -38,12 +38,17 @@ function Game.create(nonsense_words, short_words, long_words)
 	self.input = ""
 	self.num_letters = 0
 
-	self.word_list = self.nonsense_words
+	self.word_list = {}
+
+	-- merge all the lists into one
+	self:initWordList()
+
 
 	self.y1 = 100
 	self.y2 = 250
 	self.pos = 0  -- last word position 1..6
 	self.game_over = false
+	self.line_count = 0  -- count of how many lines the plane has flown over
 
 	self.button = {
 		game_over = Button.createTextButton("Game Over", 400, 250,false),
@@ -80,6 +85,28 @@ function Game.create(nonsense_words, short_words, long_words)
 
 end
 
+
+-- Merge all the word lists into one
+function Game:initWordList()
+	local i = 1
+	for k,v in ipairs(self.nonsense_words) do 
+		self.word_list[i] = v 
+		i = i + 1
+	end
+	for k,v in ipairs(self.short_words) do 
+		self.word_list[i] = v 
+		i = i + 1
+	end
+	for k,v in ipairs(self.long_words) do 
+		self.word_list[i] = v 
+		i = i + 1
+	end
+
+	self.word_list.max_size = # self.word_list
+	self.word_list.size = 2  -- start size
+
+end
+
 -- Initialize possition for typed word box
 function Game:initBox()
 	local max_str = "abcdefghj"
@@ -103,11 +130,13 @@ function Game:randomWord()
 		index =math.random(s.word_list.size)
 		new_word = s.word_list[index]
 		done =true
+		--[[
 		for i,w in ipairs(self.words) do
 			if (new_word == w.word) then
 				done=false
 			end
 		end
+		--]]
 	end
 	return new_word
 end
@@ -184,6 +213,34 @@ function Game:update(dt)
 		self.plane.x = -195
 		self.cloud.x = 800
 		self.plane.y, self.cloud.y = self.cloud.y, self.plane.y
+
+		self.line_count = self.line_count + 1
+		if (self.line_count == 4) then
+			-- add more active words
+			self.line_count = 0
+			self.word_list.size = self.word_list.size + 2
+			if (self.word_list.size > self.word_list.max_size) then
+				self.word_list.size = self.word_List.max_size
+			end
+		end
+
+		-- count how many suns are on the screen
+		local suns = 0
+		for i,w in ipairs(self.words) do
+			if (w.state=="sun") then
+				suns = suns + 1
+			end
+		end
+
+		-- adjust speed
+		if (suns >= 5) then
+			self.plane.xSpeed=self.plane.xSpeed + 20
+		end
+
+		if (suns <= 2) then
+			self.plane.xSpeed=self.plane.xSpeed - 20
+		end
+
 	end
 
 	-- show word?
@@ -291,9 +348,11 @@ function Game:keypressed(key)
 
 		-- check if input matches a displayed word
 		for i,w in ipairs(self.words)do
-			if (w.word == self.input) then
+			if (w.word == self.input and w.state=="word") then
+				w.word=""
 				w.state="sun"
 				self.score = self.score + self.num_letters
+				break;
 			end
 		end
 

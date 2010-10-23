@@ -69,7 +69,7 @@ function Title:mousepressed(x,y,button)
 			if n == "lessons" then
 				state = LessonMenu.create()
 			elseif n == "game" then
-				state = Game.create(data_1a.nonsense, data_1a.short,data_1a.long)
+				state = Game.create(data_1a)
 			elseif n == "screen" then
 				self:toggleScreen()
 			elseif n == "quit" then
