@@ -60,7 +60,7 @@ function Game.create(data)
 	self.line_count = 0  -- count of how many lines the plane has flown over
 
 	self.button = {
-		game_over = Button.createTextButton("Game Over", 400, 250,false),
+		game_over = Button.createTextButton("Time is up!", 400, 250,false),
 		again = Button.createTextButton("Again", 300, 350),
 		back = Button.createTextButton("Back", 500, 350) 
 	}
@@ -166,7 +166,7 @@ function Game:changePlaneSpeed(delta)
 		self.plane.xSpeed = min_speed
 	end
 
-	print("speed: " .. self.plane.xSpeed)
+	--print("speed: " .. self.plane.xSpeed)
 
 
 end
@@ -287,8 +287,8 @@ function Game:update(dt)
 			if (self.min_index  > self.word_list.max_size -10) then
 				self.min_index = self.min_index - 10
 			end
-			print("min_index: " .. self.min_index)
-			print("max_index: " .. self.word_list.size)
+			--print("min_index: " .. self.min_index)
+			--print("max_index: " .. self.word_list.size)
 		end
 
 		-- count how many suns are on the screen
