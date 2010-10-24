@@ -367,7 +367,7 @@ function Game:mousepressed(x,y,button)
 	for n,b in pairs(self.button) do
 		if b:mousepressed(x,y,button) then
 			if n == "back" then
-				state = Title.create()
+				state = GameMenu.create()
 			elseif n == "again" then
 				state = Game.create(self.data)
 			end
@@ -382,7 +382,7 @@ end
 
 function Game:keypressed(key)
 	if key == "escape" then
-		state = Title.create()
+		state = GameMenu.create()
 	elseif key == "return" then
 		if (game_over) then return end
 
