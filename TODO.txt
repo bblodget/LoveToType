@@ -1,9 +1,7 @@
 To Do List
 
- - Adjust timer to decrement once every 10 seconds
- - Add +2 words every line
- - Add option to continue?
- - Add menu to select game level
+ - We should be able to measure typing rate in the game and use
+   that to set the airplane speed.
  - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
  - When plane hits word have them wiggle a little bit
