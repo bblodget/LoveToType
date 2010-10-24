@@ -32,10 +32,12 @@ function Game.create(data)
 	self.short_words = data.short
 	self.long_words = data.long
 
-	self.START_TIME = 120 -- seconds
+	self.START_TIME = 180 -- seconds (3 minutes)
 	self.time_left = self.START_TIME
 	self.time = 0		-- counts seconds since start of game
 	self.timer_start = love.timer.getTime()
+	self.display_time_left = 0
+	self.first_time = true	-- just started the game
 
 	self.score = 0
 	self.hits = 0
@@ -151,7 +153,7 @@ end
 
 -- changes the speed of the plane
 function Game:changePlaneSpeed(delta)
-	local min_speed=60
+	local min_speed=40
 	local max_speed=300
 
 	self.plane.xSpeed = self.plane.xSpeed + delta
@@ -214,7 +216,7 @@ function Game:draw()
 	--love.graphics.printf(t_hits .. "/" .. self.max_hits, 650, 500,800,'left')
 
 	-- time
-	love.graphics.printf("time\n" .. self.time_left, 650, 500,800,'left')
+	love.graphics.printf("count down\n" .. self.display_time_left, 650, 500,800,'left')
 
 
 	-- draw rect for typed word
@@ -246,6 +248,12 @@ function Game:update(dt)
 		timer_end = love.timer.getTime()
 		self.time = math.floor(timer_end - self.timer_start)
 		self.time_left = self.START_TIME - self.time
+		if (self.time_left > 10) then
+			self.display_time_left = math.floor(self.time_left/10)
+		else
+			self.display_time_left = self.time_left/10
+		end
+
 	end
 
 
@@ -257,16 +265,27 @@ function Game:update(dt)
 		self.plane.line, self.cloud.line = self.cloud.line, self.plane.line
 
 		self.line_count = self.line_count + 1
+
 		if (self.line_count == 2) then
 			-- add more active words
 			self.line_count = 0
-			self:changePlaneSpeed(-10)  -- slow down a little for new words
-			self.word_list.size = self.word_list.size + 2
+
+			-- adjust word list size according to plane speed
+			if (self.plane.xSpeed > 120) then
+				self.word_list.size = self.word_list.size + 4
+				self.min_index = self.min_index + 2
+			elseif (self.plane.xSpeed > 100) then
+				self.word_list.size = self.word_list.size + 2
+				self.min_index = self.min_index + 1
+			elseif (self.plane.xSpeed >= 60) then
+				self.word_list.size = self.word_list.size + 1
+			end
+				
 			if (self.word_list.size > self.word_list.max_size) then
 				self.word_list.size = self.word_list.max_size
 			end
-			if (self.word_list.size  > 5) then
-				self.min_index = self.word_list.size - 5
+			if (self.min_index  > self.word_list.max_size -10) then
+				self.min_index = self.min_index - 10
 			end
 			print("min_index: " .. self.min_index)
 			print("max_index: " .. self.word_list.size)
@@ -280,14 +299,28 @@ function Game:update(dt)
 			end
 		end
 
-		-- adjust speed
-		if (suns >= 5) then
-			self:changePlaneSpeed(20)
+		
+		-- the first time on the first line
+		-- add 3 suns (for the 2nd line)
+		-- this gets us up to speed faster
+		if (self.first_time) then
+			self.first_time = false
+			suns = suns + 3
 		end
 
-		if (suns <= 1) then
+		-- adjust speed
+		if (suns == 6) then
+			self:changePlaneSpeed(30)
+		elseif (suns == 5) then
+			self:changePlaneSpeed(20)
+		elseif (suns == 2) then
+			self:changePlaneSpeed(-10)
+		elseif (suns == 1) then
 			self:changePlaneSpeed(-20)
+		elseif (suns == 0) then
+			self:changePlaneSpeed(-30)
 		end
+
 
 	end
 
@@ -300,7 +333,7 @@ function Game:update(dt)
 			self.last_pos = i
 			if (w.state=="word") then
 				self.hits = self.hits + 1
-				self:changePlaneSpeed(-10)  -- slow plane down
+				self:changePlaneSpeed(-20)  -- slow plane down
 				w.word = ""
 				w.state = "none"
 			else

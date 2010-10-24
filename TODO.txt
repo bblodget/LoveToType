@@ -1,8 +1,8 @@
 To Do List
 
- - Add speed at the bottom
- - Maybe the game would work better as time limited. Add a time
-   limit.
+ - Adjust timer to decrement once every 10 seconds
+ - Add +2 words every line
+ - Add option to continue?
  - Add menu to select game level
  - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
