@@ -28,6 +28,8 @@ require "results"
 require "data_1a"
 require "data_1b"
 require "game"
+require "gameMenu"
+require "gameInstruct"
 
 function love.load()
 

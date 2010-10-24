@@ -1,3 +1,4 @@
+------------------------------------------------------------------------
 -- title.lua
 -- 
 -- Copyright 2010 Brandon Blodget
@@ -16,6 +17,7 @@
 -- 
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
+------------------------------------------------------------------------
 
 
 Title = {}
@@ -69,7 +71,7 @@ function Title:mousepressed(x,y,button)
 			if n == "lessons" then
 				state = LessonMenu.create()
 			elseif n == "game" then
-				state = Game.create(data_1a)
+				state = GameMenu.create()
 			elseif n == "screen" then
 				self:toggleScreen()
 			elseif n == "quit" then
