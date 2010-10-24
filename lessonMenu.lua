@@ -22,12 +22,20 @@ LessonMenu = {}
 LessonMenu.__index = LessonMenu
 
 
-function LessonMenu.create()
+function LessonMenu.create(title)
 	local self = LessonMenu
 
 	-- only need one instance of LessonMenu
-	if (self.initialized) then
-		return self
+	--if (self.initialized) then
+	--	return self
+	--end
+
+	-- set title if given one
+	if (title) then
+		self.title = title
+	else
+		-- default title
+		self.title = "Lessons"
 	end
 
 	self.cx = 400
@@ -45,7 +53,7 @@ function LessonMenu.create()
 	local s = self.s
 
 	self.button = {
-		title = Button.createTextButton("Lessons", 400, 120, false),
+		title = Button.createTextButton(self.title, 400, 120, false),
 
 		instruct = Button.createTextButton("Instructions", cx, y-50),
 		level = Button.createTextButton("Level:", x, y, false),
@@ -99,6 +107,7 @@ function LessonMenu:update(dt)
 
 end
 
+
 function LessonMenu:mousepressed(x,y,button)
 	local cx = self.cx
 	local yy = self.yy
@@ -107,7 +116,7 @@ function LessonMenu:mousepressed(x,y,button)
 	for n,b in pairs(self.button) do
 		if b:mousepressed(x,y,button) then
 			if n == "instruct" then
-				state = LessonInstruct.create()
+				self:instructions()
 			elseif n == "one" then
 				self.level = 1
 				self.button.sub1 = Button.createTextButton("Lesson 1-A    [home keys]",cx,yy)
@@ -149,16 +158,11 @@ function LessonMenu:mousepressed(x,y,button)
 				self.button.sub2 = Button.createTextButton("Lesson 8 Review",cx,yy+(s*1),false)
 				self.button.sub3 = nil
 			elseif n == "sub1" then
-				if (self.level == 1) then
-					lesson = Lesson.create(data_1a)
-					state = lesson:next()
-				end
+				self:sub1()
 			elseif n == "sub2" then
-				if (self.level == 1) then
-					lesson = Lesson.create(data_1b)
-					state = lesson:next()
-				end
+				self:sub2()
 			elseif n == "sub3" then
+				self:sub3()
 			elseif n == "back" then
 				state = Title.create()
 			end
@@ -167,11 +171,33 @@ function LessonMenu:mousepressed(x,y,button)
 
 end
 
-
 function LessonMenu:keypressed(key)
 	if key == "escape" then
 		state = Title.create()
 	end
 end
 
+
+function LessonMenu:instructions()
+	state = LessonInstruct.create()
+end
+
+function LessonMenu:sub1()
+	if (self.level == 1) then
+		lesson = Lesson.create(data_1a)
+		state = lesson:next()
+	end
+end
+
+
+function LessonMenu:sub2()
+	if (self.level == 1) then
+		lesson = Lesson.create(data_1b)
+		state = lesson:next()
+	end
+end
+
+function LessonMenu:sub3()
+	return
+end
 
