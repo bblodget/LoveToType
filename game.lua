@@ -128,7 +128,6 @@ function Game:initBox()
 end
 
 -- Return random word from the word_list.
--- Make sure the word has not already been displayed 
 function Game:randomWord()
 	local s = self
 	local index
