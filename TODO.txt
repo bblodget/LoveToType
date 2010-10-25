@@ -2,6 +2,10 @@ To Do List
 
  - We should be able to measure typing rate in the game and use
    that to set the airplane speed.
+ - Create a test for love 0.7.0 by checking for functions that only
+   exist in 0.7 (hack).  Create routine that makes text anchor point
+   consistant between 0.6.2 and 0.7
+ - Keep track of high-scores
  - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
  - When plane hits word have them wiggle a little bit
