@@ -35,11 +35,16 @@ Lesson.__index = Lesson
 
 
 -- Creates the lesson for the given level data
-function Lesson.create(data)
+function Lesson.create(data,step)
 	local self = Lesson
 
 	self.data = data
-	self.step = 0
+
+	if (step) then
+		self.step = step
+	else
+		self.step = 0
+	end
 
 	return self
 end
@@ -71,6 +76,21 @@ function Lesson:next()
 		if (data.actual_wpm > target) then
 			data.target_wpm = data.actual_wpm -2
 			data.nonsense_len = 4
+		end
+		return Results.create(data.name,true,data.actual_wpm,target)
+	-- no self.step == 9 falls to else clause
+	-- step == 10 is for the review level
+	elseif (self.step == 10) then 
+		local words_per_line = 2
+		if (data.actual_wpm > 15) then
+			words_per_line = 4
+		end
+		return Word.create(data.long,nil,true,words_per_line,32,data.name,color.dark_blue)
+	elseif (self.step == 11) then 
+		data.actual_wpm = wpm
+		local target = data.target_wpm
+		if (data.actual_wpm > target) then
+			data.target_wpm = data.actual_wpm -2
 		end
 		return Results.create(data.name,true,data.actual_wpm,target)
 	else 

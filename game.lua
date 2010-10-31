@@ -111,21 +111,37 @@ end
 -- Merge all the word lists into one
 function Game:initWordList()
 	local i = 1
-	for k,v in ipairs(self.nonsense_words) do 
-		self.word_list[i] = v 
-		i = i + 1
+	if (self.nonsense_words) then
+		for k,v in ipairs(self.nonsense_words) do 
+			self.word_list[i] = v 
+			i = i + 1
+		end
 	end
-	for k,v in ipairs(self.short_words) do 
-		self.word_list[i] = v 
-		i = i + 1
+
+	if (self.short_words) then
+		for k,v in ipairs(self.short_words) do 
+			self.word_list[i] = v 
+			i = i + 1
+		end
 	end
-	for k,v in ipairs(self.long_words) do 
-		self.word_list[i] = v 
-		i = i + 1
+
+	if (self.long_words) then
+		for k,v in ipairs(self.long_words) do 
+			self.word_list[i] = v 
+			i = i + 1
+		end
 	end
 
 	self.word_list.max_size = # self.word_list
-	self.word_list.size = 2  -- start size
+
+	-- if nonsense_words exist start with small list size
+	-- if no nonsense words then this is a review level
+	-- so include all the words
+	if (self.nonsense_words) then
+		self.word_list.size = 2  -- start size
+	else
+		self.word_list.size = self.word_list.max_size  -- start size
+	end
 
 end
 
@@ -146,6 +162,12 @@ function Game:randomWord()
 	local index
 	local new_word = ""
 	local done = false
+
+	-- if this is a review level (no nonsense words)
+	-- then set the min_index = 1 so we get the whole list
+	if (not s.nonsense_words) then
+		s.min_index = 1
+	end
 
 	while (not done) do
 		index =math.random(s.min_index, s.word_list.size)

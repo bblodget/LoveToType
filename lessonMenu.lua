@@ -70,7 +70,7 @@ function LessonMenu.create(title)
 
 		sub1 = Button.createTextButton("Lesson 1-A    [home keys]",cx,yy),
 		sub2 = Button.createTextButton("Lesson 1-B    [e n g o]",cx,yy+(s*1)),
-		sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2),false),
+		sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2)),
 
 		back = Button.createTextButton("Back", cx, 550) 
 
@@ -121,7 +121,7 @@ function LessonMenu:mousepressed(x,y,button)
 				self.level = 1
 				self.button.sub1 = Button.createTextButton("Lesson 1-A    [home keys]",cx,yy)
 				self.button.sub2 = Button.createTextButton("Lesson 1-B    [e n g o]",cx,yy+(s*1))
-				self.button.sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2),false)
+				self.button.sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2))
 			elseif n == "two" then
 				self.level = 2
 				self.button.sub1 = Button.createTextButton("Lesson 2-A    [t i h c]",cx,yy,false)
@@ -198,6 +198,11 @@ function LessonMenu:sub2()
 end
 
 function LessonMenu:sub3()
-	return
+	if (self.level == 1) then
+		lesson = Lesson.create(data_1r,9) -- step 9 for review level
+		state = lesson:next()
+	end
 end
+
+
 

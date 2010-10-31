@@ -27,6 +27,7 @@ require "letters"
 require "results"
 require "data_1a"
 require "data_1b"
+require "data_1r"
 require "game"
 require "gameMenu"
 require "gameInstruct"
@@ -36,6 +37,7 @@ function love.load()
 	-- Resources
 	color = {	light_blue = {128,128,255},
 				bright_blue = {63,193,245},
+				dark_blue = {64,64,255},
 				light_green = {128,255,128},
 				pink = {255,128,128},
 				purple = {130,41,79},

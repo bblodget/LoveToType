@@ -1,11 +1,5 @@
-Done 10/30/2010
-
- - Instead of keeping track of high score.  Keep track of
-   current speed and max speed.
- - Set score to new max or increment by 10 if > 3 suns.  If hit
-   word decrease or if suns < 2.
- - We should be able to measure typing rate in the game and use
-   that to set the airplane speed.
+Done 10/31/2010
+ - Write Lesson 1 Review. Works for both lessons and game.
 
 To Do List
  - Create a test for love 0.7.0 by checking for functions that only
@@ -15,7 +9,6 @@ To Do List
  - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
  - When plane hits word have them wiggle a little bit
- - Write Lesson 1 Review 
  - Write Lessons 2 - 8
  - Add ability for TAB and ENTER to select menu choices
 

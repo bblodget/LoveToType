@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------
--- gameMenu.lua
+-- data_1r.lua
 -- 
 -- Copyright 2010 Brandon Blodget
 --
@@ -19,40 +19,33 @@
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------
 
+module(..., package.seeall);
 
-GameMenu = {}
-GameMenu.__index = LessonMenu  -- inherits from LessonMenu
+name="Review 1"
+-- e n g o
+-- home row
 
+target_wpm = 15
+actual_wpm = 0
 
-function GameMenu.create()
-	setmetatable(GameMenu, GameMenu)
-	LessonMenu.create("Game")
-	return GameMenu
+long ={}
+local i = 1
+for k,v in ipairs(data_1a.short) do 
+	long[i] = v 
+	i = i + 1
 end
-
-
-function GameMenu:instructions()
-	state = GameInstruct.create()
+for k,v in ipairs(data_1a.long) do 
+	long[i] = v 
+	i = i + 1
 end
-
-function GameMenu:sub1()
-	if (self.level == 1) then
-		state = Game.create(data_1a)
-	end
+for k,v in ipairs(data_1b.short) do 
+	long[i] = v 
+	i = i + 1
 end
-
-
-function GameMenu:sub2()
-	if (self.level == 1) then
-		state = Game.create(data_1b)
-	end
+for k,v in ipairs(data_1b.long) do 
+	long[i] = v 
+	i = i + 1
 end
-
-function GameMenu:sub3()
-	if (self.level == 1) then
-		state = Game.create(data_1r)
-	end
-end
-
-
+long.size = # long
+long.words_per_index = 1
 

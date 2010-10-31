@@ -26,8 +26,18 @@ Word.__index = Word
 -- info_list: info about the key being taught. (can be nil)
 -- rand: boolen.  True = random order, False = seq order
 -- words_per_line: how many words should be put on a line 
-function Word.create(word_list, info_list, rand, words_per_line)
+-- rand_list_size: How many words in rand mode
+function Word.create(word_list, info_list, rand, words_per_line, rand_list_size,
+			title, bgcolor)
 	local self = Word
+
+	if (not rand_list_size) then
+		rand_list_size = 16
+	end
+
+	self.title = title
+	self.bgcolor = color.light_green
+	if (bgcolor) then self.bgcolor = bgcolor end
 
 	self.word_list = word_list
 	self.info_list = info_list
@@ -53,7 +63,7 @@ function Word.create(word_list, info_list, rand, words_per_line)
 
 	self.rep_count = 1
 	if (self.rand) then
-		self.max_count = 16/self.entries_per_line
+		self.max_count = rand_list_size/self.entries_per_line
 	else
 		self.max_count = self.word_list.size/self.entries_per_line
 	end
@@ -64,7 +74,7 @@ function Word.create(word_list, info_list, rand, words_per_line)
 
 	-- set font, background and text color
 	love.graphics.setFont(font.large)
-	love.graphics.setBackgroundColor(unpack(color.light_green)) 
+	love.graphics.setBackgroundColor(unpack(self.bgcolor)) 
 	love.graphics.setColor(unpack(color.black)) 
 
 	self:newTarget()  -- get first target line
@@ -122,6 +132,11 @@ end
 
 
 function Word:draw()
+	if (self.title) then
+		love.graphics.setFont(font.large)
+		love.graphics.printf(string.upper(self.title),0,50,800, 'center')
+	end
+
 	if (self.info_list) then
 		love.graphics.setFont(font.default)
 		love.graphics.printf(self.info,10,50,800, 'left')
