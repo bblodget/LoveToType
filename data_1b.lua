@@ -55,7 +55,7 @@ nonsense[23] = "dD;"
 nonsense[24] = "fF;"
 
 intro = {}
-intro.size = 12
+intro.size = 24
 intro[1] = "key:   e\nleft hand\n3rd row\n2nd finger"
 intro[2] = intro[1]
 intro[3] = intro[1]
@@ -82,7 +82,7 @@ intro[23] = intro[17]
 intro[24] = intro[17]
 
 letter = {}
-letter.size = 12
+letter.size = 16
 letter[1] = "a"
 letter[2] = "s"
 letter[3] = "d"
@@ -91,10 +91,16 @@ letter[5] = "j"
 letter[6] = "k"
 letter[7] = "l"
 letter[8] = ";"
+-- new letters
 letter[9] = "e"
 letter[10] = "n"
 letter[11] = "g"
 letter[12] = "o"
+-- again to make them appear more often
+letter[13] = "e"
+letter[14] = "n"
+letter[15] = "g"
+letter[16] = "o"
 
 
 short ={}

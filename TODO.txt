@@ -1,7 +1,10 @@
 Done 10/31/2010
- - Write Lesson 1 Review. Works for both lessons and game.
+ - Write Lesson 2-A [t i h c]
 
 To Do List
+ - Fix it so each level keeps track of nonsense word length
+ - Problem with default text.  Can't tell the difference betwen 'I'
+   and 'l'
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
    consistant between 0.6.2 and 0.7

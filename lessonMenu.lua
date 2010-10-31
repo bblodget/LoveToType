@@ -1,3 +1,4 @@
+-------------------------------------------------------------------------
 -- lessonMenu.lua
 -- 
 -- Copyright 2010 Brandon Blodget
@@ -16,6 +17,7 @@
 -- 
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
+-------------------------------------------------------------------------
 
 
 LessonMenu = {}
@@ -124,7 +126,7 @@ function LessonMenu:mousepressed(x,y,button)
 				self.button.sub3 = Button.createTextButton("Lesson 1 Review",cx,yy+(s*2))
 			elseif n == "two" then
 				self.level = 2
-				self.button.sub1 = Button.createTextButton("Lesson 2-A    [t i h c]",cx,yy,false)
+				self.button.sub1 = Button.createTextButton("Lesson 2-A    [t i h c]",cx,yy)
 				self.button.sub2 = Button.createTextButton("Lesson 2-B    [r u v p .]",cx,yy+(s*1),false)
 				self.button.sub3 = Button.createTextButton("Lesson 2 Review",cx,yy+(s*2),false)
 			elseif n == "three" then
@@ -185,6 +187,9 @@ end
 function LessonMenu:sub1()
 	if (self.level == 1) then
 		lesson = Lesson.create(data_1a)
+		state = lesson:next()
+	elseif (self.level == 2) then
+		lesson = Lesson.create(data_2a)
 		state = lesson:next()
 	end
 end

@@ -1,3 +1,4 @@
+-------------------------------------------------------------------------
 -- main.lua
 -- 
 -- Copyright 2010 Brandon Blodget
@@ -16,6 +17,7 @@
 -- 
 -- You should have received a copy of the GNU General Public License
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
+-------------------------------------------------------------------------
 
 require "button"
 require "title"
@@ -31,6 +33,7 @@ require "data_1r"
 require "game"
 require "gameMenu"
 require "gameInstruct"
+require "data_2a"
 
 function love.load()
 
