@@ -41,9 +41,10 @@ function GameInstruct.create()
 		"An airplane will fly by and leave words in the sky.  " ..
 		"Type any of the words you see and press enter or return.  "..
 		"If the word you type matches one in the sky it will turn " ..
-		"into a sun.  The better you do the faster the plane will go.  "..
-		"You get one point for every character of a word that is turned "..
-		"into a sun.  There is a time limit of 3 minutes for the game.  "..
+		"into a sun.  The faster you type the words the faster the plane will go.  "..
+		"The goal is to make the plane go as fast as possible. "..
+		"The plane's current and maximum speed is displayed at the bottom of the screen.  " ..
+		"There is a time limit of 3 minutes.\n"..
 		"Good Luck!"
 	
 	return self

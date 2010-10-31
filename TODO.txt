@@ -1,7 +1,13 @@
-To Do List
+Done 10/30/2010
 
+ - Instead of keeping track of high score.  Keep track of
+   current speed and max speed.
+ - Set score to new max or increment by 10 if > 3 suns.  If hit
+   word decrease or if suns < 2.
  - We should be able to measure typing rate in the game and use
    that to set the airplane speed.
+
+To Do List
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
    consistant between 0.6.2 and 0.7

@@ -32,7 +32,10 @@ function Game.create(data)
 	self.short_words = data.short
 	self.long_words = data.long
 
+	self.PIXELS_PER_WORD = 70  -- estimate
+	self.AVG_OVER = 3		-- number of words to avg time over
 	self.START_TIME = 180 -- seconds (3 minutes)
+	self.START_SPEED = 60  -- initial speed of plane
 	self.time_left = self.START_TIME
 	self.time = 0		-- counts seconds since start of game
 	self.timer_start = love.timer.getTime()
@@ -47,6 +50,16 @@ function Game.create(data)
 	self.num_letters = 0
 	self.last_pos = 0   -- the last word pos of plane
 	self.min_index = 1	-- min index for choosing random word from word_list
+	self.max_speed = self.START_SPEED -- the maximum speed achieved so far
+	self.final_speed = 0 -- speed of plane at end of game
+
+	-- timing member vars
+	self.timer_on = false
+	self.stime = 0
+	self.etime = 0
+	self.word_time = {0,0,0,0,0,0}  -- time to type last 6 correct words
+	self.ti	= 1 -- time index into self.word_time
+	self.avg_time = 1		-- avg per word time
 
 	self.word_list = {}
 
@@ -65,7 +78,7 @@ function Game.create(data)
 		back = Button.createTextButton("Back", 500, 350) 
 	}
 
-	self.plane = { img = graphics.plane, line=1, x=0, y=self.y1, xSpeed=60, scale=0.25 };
+	self.plane = { img = graphics.plane, line=1, x=0, y=self.y1, xSpeed=self.START_SPEED, scale=0.25 };
 	self.cloud = { img = graphics.cloud, line=2, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
 
 
@@ -150,16 +163,46 @@ function Game:randomWord()
 end
 
 
--- changes the speed of the plane
-function Game:changePlaneSpeed(delta)
-	local min_speed=40
-	local max_speed=300
+-- increases the speed of the plane
+function Game:incPlaneSpeed()
+	-- local max_speed=400
+	local speed = math.floor(self.PIXELS_PER_WORD/self.avg_time) + 20
 
-	self.plane.xSpeed = self.plane.xSpeed + delta
+	-- compare current speed to new speed
+	local delta = speed - self.plane.xSpeed
 
-	if (self.plane.xSpeed > max_speed) then
-		self.plane.xSpeed = max_speed
+	if (delta > 10) then
+		self.plane.xSpeed = speed
+	else 
+		self.plane.xSpeed = self.plane.xSpeed + 10
 	end
+
+
+	--if (self.plane.xSpeed > max_speed) then
+	--	self.plane.xSpeed = max_speed
+	--end
+
+	-- keep track of max_speed
+	if (self.plane.xSpeed > self.max_speed) then
+		self.max_speed = self.plane.xSpeed
+		-- increase cloud speed in neg direction
+		if (self.max_speed > 200) then
+			self.cloud.xSpeed = -(self.max_speed + 50)
+		end
+	end
+
+
+
+
+	--print("plane_speed: " .. self.plane.xSpeed)
+end
+
+-- decrease the speed of the plane
+function Game:decPlaneSpeed()
+	local min_speed=40
+	local dec_amount = 20
+
+	self.plane.xSpeed = self.plane.xSpeed - dec_amount
 
 	if (self.plane.xSpeed < min_speed) then
 		self.plane.xSpeed = min_speed
@@ -205,10 +248,21 @@ function Game:draw()
 	end
 
 	-- score
+	-- love.graphics.setFont(font.default)
+	-- love.graphics.setColor(unpack(color.black))
+	-- local t_score = "score\n" .. self.score
+	-- love.graphics.printf(t_score, 40, 500,800,'left')
+
+	-- show speed
 	love.graphics.setFont(font.default)
 	love.graphics.setColor(unpack(color.black))
-	local t_score = "score\n" .. self.score
-	love.graphics.printf(t_score, 40, 500,800,'left')
+	local t_cspeed = "speed " .. self.plane.xSpeed
+	local t_mspeed = "max speed " .. self.max_speed
+	if (self.game_over) then
+		t_cspeed = "final speed " .. self.final_speed
+	end
+	love.graphics.printf(t_cspeed, 40, 500,800,'left')
+	love.graphics.printf(t_mspeed, 40, 550,800,'left')
 
 	-- hits
 	--local t_hits = "hit words\n" .. self.hits
@@ -307,18 +361,14 @@ function Game:update(dt)
 			suns = suns + 3
 		end
 
-		-- adjust speed
-		if (suns == 6) then
-			self:changePlaneSpeed(30)
-		elseif (suns == 5) then
-			self:changePlaneSpeed(20)
-		elseif (suns == 2) then
-			self:changePlaneSpeed(-10)
-		elseif (suns == 1) then
-			self:changePlaneSpeed(-20)
-		elseif (suns == 0) then
-			self:changePlaneSpeed(-30)
+		-- adjust plane speed
+		if (suns > 3) then
+			self:incPlaneSpeed()
+		elseif (suns <= 2) then
+			self:decPlaneSpeed()
 		end
+
+		-- print("speed: " .. self.plane.xSpeed)
 
 
 	end
@@ -332,7 +382,7 @@ function Game:update(dt)
 			self.last_pos = i
 			if (w.state=="word") then
 				self.hits = self.hits + 1
-				self:changePlaneSpeed(-20)  -- slow plane down
+				self:decPlaneSpeed()  -- slow plane down
 				w.word = ""
 				w.state = "none"
 			else
@@ -344,7 +394,9 @@ function Game:update(dt)
 
 	-- check if game is over
 	--if (self.hits >= self.max_hits) then
-	if (self.time_left <= 0) then
+	if (self.time_left <= 0 and not self.game_over) then
+		self.final_speed = self.plane.xSpeed
+
 		-- freeze the moving things
 		self.plane.xSpeed = 0
 		self.cloud.xSpeed = 0
@@ -385,6 +437,8 @@ function Game:keypressed(key)
 	elseif key == "return" then
 		if (game_over) then return end
 
+		self.etime = love.timer.getTime() -- get time before audio
+
 		love.audio.stop()
 		love.audio.play(sound.beep)
 
@@ -394,6 +448,28 @@ function Game:keypressed(key)
 				w.word=""
 				w.state="sun"
 				self.score = self.score + self.num_letters
+
+				-- stop timing to get time for word
+				self.timer_on = false;
+				self.word_time[self.ti] = self.etime-self.stime
+				-- print("word_time: " .. self.word_time[self.ti])
+				if (self.ti == self.AVG_OVER) then self.ti = 0 end
+				self.ti = self.ti + 1
+
+				-- avg time for last 6 words
+				local n = 0
+				local sum = 0
+				--for i,t in ipairs(self.word_time) do
+				for i=1,self.AVG_OVER do
+					t = self.word_time[i]
+					if (t>0) then
+						sum = sum + t
+						n = n + 1
+					end
+				end
+				self.avg_time = sum / n
+				-- print("avg_time: " .. self.avg_time)
+
 				break;
 			end
 		end
@@ -417,6 +493,14 @@ function Game:keypressed(key)
 
 		self.input = self.input .. key
 		self.num_letters = self.num_letters + 1
+
+		if (not self.timer_on) then
+			-- start timing a new word
+			self.timer_on = true
+			self.stime = love.timer.getTime()
+		end
+
+		-- handle too many letters typed
 		if (self.num_letters == 8) then
 			self.input=""
 			self.num_letters = 0
