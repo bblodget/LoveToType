@@ -114,7 +114,7 @@ letter[19] = "h"
 letter[20] = "c"
 
 short ={}
-short.size = 15
+short.size = 17
 short.words_per_index = 1
 short[1] = "if"
 short[2] = "set"
@@ -131,9 +131,11 @@ short[12] = "is"
 short[13] = "to"
 short[14] = "he"
 short[15] = "let"
+short[16] = "the"
+short[17] = "eat"
 
 long ={}
-long.size = 15
+long.size = 25
 long.words_per_index = 1
 long[1] = "this"
 long[2] = "then"
@@ -150,6 +152,16 @@ long[12] = "life"
 long[13] = "still"
 long[14] = "took"
 long[15] = "each"
+long[16] = "shift"
+long[17] = "kind"
+long[18] = "might"
+long[19] = "tone"
+long[20] = "find"
+long[21] = "total"
+long[22] = "list"
+long[23] = "thank"
+long[24] = "that"
+long[25] = "once"
 
 
 
