@@ -1,0 +1,8 @@
+PT_Sans-Regular.ttf, PT_Sans-Bold.ttf
+	source: Google font directory
+	url: http://code.google.com/webfonts/family?family=PT+Sans&subset=latin#code 
+	license: SIL Open Font License, 1.1 
+	license url: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+
+
+

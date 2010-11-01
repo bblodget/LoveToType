@@ -48,10 +48,14 @@ function love.load()
 				white = {255,255,255},
 				overlay = {255,255,255,235} }
 
-	font = {	default = love.graphics.newFont(24),
-				large = love.graphics.newFont(32),
-				huge = love.graphics.newFont(72),
-				small = love.graphics.newFont(22) }
+
+	font_name = "fonts/PT_Sans-Regular.ttf"
+
+	font = {	default =
+	love.graphics.newFont(font_name,24),
+				large = love.graphics.newFont(font_name,32),
+				huge = love.graphics.newFont(font_name,72),
+				small = love.graphics.newFont(font_name,22) }
 
 	graphics = {
 		logo = love.graphics.newImage("images/love-ball.png"),
