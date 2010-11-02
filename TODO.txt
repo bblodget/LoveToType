@@ -1,7 +1,8 @@
 Done 11/02/2010
- - Wrote lesson 2-B
+ - Wrote Lesson 2 Review
 
 To Do List
+ - write util to search for lesson word from /usr/share/dict/words
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
@@ -10,7 +11,7 @@ To Do List
  - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
  - When plane hits word have them wiggle a little bit
- - Write Lessons 2 - 8
+ - Write Lessons 3 - 8
  - Add ability for TAB and ENTER to select menu choices
 
 
