@@ -34,6 +34,7 @@ require "game"
 require "gameMenu"
 require "gameInstruct"
 require "data_2a"
+require "data_2b"
 
 function love.load()
 

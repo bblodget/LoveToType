@@ -1,8 +1,7 @@
-Done 11/01/2010
- - Added more words to data_2a.lua
+Done 11/02/2010
+ - Wrote lesson 2-B
 
 To Do List
- - Write lesson 2-B
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
