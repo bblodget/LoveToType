@@ -1,8 +1,7 @@
-Done 11/02/2010
- - Wrote Lesson 2 Review
+Done 11/03/2010
+ - write util to search for lesson word from /usr/share/dict/words
 
 To Do List
- - write util to search for lesson word from /usr/share/dict/words
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
