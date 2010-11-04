@@ -1,6 +1,7 @@
-
-To Do List
+Done
  - Write lesson 3a
+	
+To Do List
  - Write lesson 3b
  - Edit the game graphics to natively be the correct size
  - Fix it so each level keeps track of nonsense word length
