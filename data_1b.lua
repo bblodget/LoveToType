@@ -104,7 +104,7 @@ letter[16] = "o"
 
 
 short ={}
-short.size = 13
+short.size = 19
 short.words_per_index = 1
 short[1] = "so"
 short[2] = "do"
@@ -119,9 +119,15 @@ short[10] = "on"
 short[11] = "go"
 short[12] = "see"
 short[13] = "end"
+short[14] = "age"
+short[15] = "and"
+short[16] = "fog"
+short[17] = "oak"
+short[18] = "one"
+short[19] = "elk"
 
 long ={}
-long.size = 12
+long.size = 20
 long.words_per_index = 1
 long[1] = "feel"
 long[2] = "done"
@@ -135,6 +141,14 @@ long[9] = "good"
 long[10] = "send"
 long[11] = "does"
 long[12] = "long"
+long[13] = "also"
+long[14] = "deal"
+long[15] = "desk"
+long[16] = "joke"
+long[17] = "loan"
+long[18] = "ankle"
+long[19] = "sands"
+long[20] = "snake"
 
 
 

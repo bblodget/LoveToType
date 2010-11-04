@@ -121,7 +121,7 @@ letter[24] = "p"
 letter[25] = "."
 
 short ={}
-short.size = 17
+short.size = 19
 short.words_per_index = 1
 short[1] = "us"
 short[2] = "air"
@@ -140,6 +140,8 @@ short[14] = "are"
 short[15] = "top"
 short[16] = "far"
 short[17] = "put"
+short[18] = "hip"
+short[19] = "nap"
 
 long ={}
 long.size = 29

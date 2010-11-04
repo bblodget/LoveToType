@@ -1,5 +1,5 @@
-Done 11/03/2010
- - write util to search for lesson word from /usr/share/dict/words
+Done 11/4/2010
+ - Added extra words to data lists 1a-2b
 
 To Do List
  - Fix it so each level keeps track of nonsense word length

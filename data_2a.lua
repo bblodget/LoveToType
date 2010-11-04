@@ -114,7 +114,7 @@ letter[19] = "h"
 letter[20] = "c"
 
 short ={}
-short.size = 17
+short.size = 21
 short.words_per_index = 1
 short[1] = "if"
 short[2] = "set"
@@ -133,6 +133,10 @@ short[14] = "he"
 short[15] = "let"
 short[16] = "the"
 short[17] = "eat"
+short[18] = "ace"
+short[19] = "ant"
+short[20] = "tea"
+short[21] = "tag"
 
 long ={}
 long.size = 25
