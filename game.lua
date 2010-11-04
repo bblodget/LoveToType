@@ -510,6 +510,9 @@ function Game:keypressed(key)
 		if (self.uppercase) then
 			-- convert to upper case
 			key = string.upper(key)
+			if (key == ";") then
+				key = ":"
+			end
 			self.uppercase = false
 		end
 

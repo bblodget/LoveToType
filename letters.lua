@@ -25,6 +25,7 @@ function Letters.create(letter)
 	local self = Letters
 
 	self.letter = letter
+	self.uppercase =false
 
 	self.index = math.random(letter.size)  -- index into letter array
 	self.prev_index = index
@@ -60,7 +61,19 @@ end
 function Letters:keypressed(key, unicode)
 	if key == "escape" then
 		state = LessonMenu.create()
+	elseif ( key == "rshift" or
+			key == "lshift")  then
+			self.uppercase = true
 	else 
+		if (self.uppercase) then
+			-- convert to upper case
+			key = string.upper(key)
+			if (key == ";") then
+				key = ":"
+			end
+			self.uppercase = false
+		end
+
 		if (key == self.target) then
 			love.audio.stop()
 			love.audio.play(sound.beep)
