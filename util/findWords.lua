@@ -39,14 +39,16 @@ local need_all = {
 	["1a"] = "asdfjkl;",
 	["1b"] = "asdfjkl;engo",
 	["2a"] = "asdfjkl;engotihc",
-	["2b"] = "asdfjkl;engotihcruvp."
+	["2b"] = "asdfjkl;engotihcruvp.",
+	["3a"] = "asdfjkl;engotihcruvp.qmxb:"
 }
 
 local need_one = {
 	["1a"] = "asdfjkl;",
 	["1b"] = "engo",
 	["2a"] = "tihc",
-	["2b"] = "ruvp."
+	["2b"] = "ruvp.",
+	["3a"] = "qmxb:"
 }
 
 local word = {}

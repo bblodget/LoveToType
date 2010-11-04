@@ -1,16 +1,16 @@
-Done 11/4/2010
- - Added extra words to data lists 1a-2b
 
 To Do List
+ - Write lesson 3a
+ - Write lesson 3b
+ - Edit the game graphics to natively be the correct size
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
    consistant between 0.6.2 and 0.7
  - Keep track of high-scores
- - Edit the game graphics to natively be the correct size
  - Add sound for when the plane hits the word
  - When plane hits word have them wiggle a little bit
- - Write Lessons 3 - 8
+ - Write Lessons 4 - 8
  - Add ability for TAB and ENTER to select menu choices
 
 
