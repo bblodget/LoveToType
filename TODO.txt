@@ -1,8 +1,7 @@
 Done 11/5/2010
- - Write lesson 3b
+ - Write lesson 3 review
 
 To Do List
- - Write lesson 3 review
  - swap the pos of "again" and "back" buttons
  - Edit the game graphics to natively be the correct size
  - Fix it so each level keeps track of nonsense word length
