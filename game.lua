@@ -74,8 +74,8 @@ function Game.create(data)
 
 	self.button = {
 		game_over = Button.createTextButton("Time is up!", 400, 250,false),
-		again = Button.createTextButton("Again", 300, 350),
-		back = Button.createTextButton("Back", 500, 350) 
+		back = Button.createTextButton("Back", 300, 350), 
+		again = Button.createTextButton("Again", 500, 350)
 	}
 
 	self.plane = { img = graphics.plane, line=1, x=0, y=self.y1, xSpeed=self.START_SPEED, scale=0.25 };
