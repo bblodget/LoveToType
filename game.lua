@@ -78,9 +78,8 @@ function Game.create(data)
 		again = Button.createTextButton("Again", 500, 350)
 	}
 
-	self.plane = { img = graphics.plane, line=1, x=0, y=self.y1, xSpeed=self.START_SPEED, scale=0.25 };
-	self.cloud = { img = graphics.cloud, line=2, x=800, y=self.y2, xSpeed=-200, scale=0.50 };
-
+	self.plane = { img = graphics.plane, line=1, x=0, y=self.y1, xSpeed=self.START_SPEED};
+	self.cloud = { img = graphics.cloud, line=2, x=800, y=self.y2, xSpeed=-200};
 
 	self.objects = {
 		self.plane,
@@ -237,8 +236,8 @@ end
 
 
 function Game:draw()
-	local wAdjust = ((graphics.sun:getWidth() * 0.25) / 3)
-	local hAdjust = (graphics.sun:getHeight() * 0.25) / 2
+	local wAdjust = graphics.sun:getWidth()  / 3
+	local hAdjust = graphics.sun:getHeight()  / 2
 
 	if (not self.game_over) then
 
@@ -250,7 +249,7 @@ function Game:draw()
 				love.graphics.printf(w.word, w.x, w.y,800,'left')
 			elseif (w.state == "sun") then
 				love.graphics.setColor(unpack(color.overlay))
-				love.graphics.draw(graphics.sun, w.x -wAdjust, w.y -hAdjust, 0, 0.25)
+				love.graphics.draw(graphics.sun, w.x -wAdjust, w.y -hAdjust, 0)
 			end
 		end
 

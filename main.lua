@@ -64,9 +64,9 @@ function love.load()
 
 	graphics = {
 		logo = love.graphics.newImage("images/love-ball.png"),
-		cloud = love.graphics.newImage("images/cloud_plain.png"),
-		plane = love.graphics.newImage("images/airplane_happy2.png"),
-		sun = love.graphics.newImage("images/sun.png")
+		cloud = love.graphics.newImage("images/cloud_small.png"),
+		plane = love.graphics.newImage("images/airplane_small.png"),
+		sun = love.graphics.newImage("images/sun_small.png")
 	}
 				
 	sound =	{	beep = love.audio.newSource("sounds/button-pressed.ogg", "static")}
