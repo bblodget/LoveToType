@@ -52,6 +52,8 @@ function GameMenu:sub2()
 		state = Game.create(data_1b)
 	elseif (self.level == 2) then
 		state = Game.create(data_2b)
+	elseif (self.level == 3) then
+		state = Game.create(data_3b)
 	end
 end
 

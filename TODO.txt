@@ -1,8 +1,9 @@
-Done
- - Write lesson 3a
-	
-To Do List
+Done 11/5/2010
  - Write lesson 3b
+
+To Do List
+ - Write lesson 3 review
+ - swap the pos of "again" and "back" buttons
  - Edit the game graphics to natively be the correct size
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
