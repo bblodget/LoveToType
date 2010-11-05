@@ -1,0 +1,7 @@
+button-pressed.ogg
+	source: Ubuntu 10.10 sounds
+	file: /usr/share/sounds/ubuntu/stereo/button-pressed.ogg
+	license: ?
+
+
+
