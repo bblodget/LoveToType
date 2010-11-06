@@ -455,7 +455,7 @@ end
 function Game:keypressed(key)
 	if key == "escape" then
 		state = GameMenu.create()
-	elseif key == "return" then
+	elseif (key == "return" or key == " ") then
 		if (game_over) then return end
 
 		self.etime = love.timer.getTime() -- get time before audio

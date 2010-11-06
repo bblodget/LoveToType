@@ -41,7 +41,7 @@ function LessonInstruct.create()
 		"Select a level and then select a lesson.  " ..
 		"Each lesson is designed to teach you 4 or 5 new keys.  " ..
 		"First nonsense combinations will be displayed to introduce each new key.  " ..
-		"Type these twice, pressing ENTER or RETURN at the end of each line.  " ..
+		"Type these twice, pressing RETURN or SPACEBAR at the end of each line.  " ..
 		"Next, keys will be displayed one at a time in a box.  Type the key that is shown.  " ..
 		"Then words or combinations using the new keys will be displayed.  Type each line twice. " ..
 		"At the end of the lesson, your actual and target words per minute will be displayed." ..

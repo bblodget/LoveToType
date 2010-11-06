@@ -39,7 +39,7 @@ function GameInstruct.create()
 	self.instruct = 
 
 		"An airplane will fly by and leave words in the sky.  " ..
-		"Type any of the words you see and press enter or return.  "..
+		"Type any of the words you see and press RETURN or SPACEBAR.  "..
 		"If the word you type matches one in the sky it will turn " ..
 		"into a sun.  The faster you type the words the faster the plane will go.  "..
 		"The goal is to make the plane go as fast as possible. "..

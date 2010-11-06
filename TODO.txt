@@ -1,6 +1,7 @@
+Done 11/6/2010
+ - Allow spacebar to work like enter during game and lessons
 
 To Do List
- - Allow spacebar to work like enter during game and lessons
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point

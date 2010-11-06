@@ -164,7 +164,11 @@ end
 function Word:keypressed(key, unicode)
 	if key == "escape" then
 		state = LessonMenu.create()
-	elseif key == "return" then
+	elseif (key == "return" or   -- return
+			(key == " " and self.input == self.target) or -- space at end
+			# self.input > # self.target  -- too many characters
+			) then
+
 		self.etime = love.timer.getTime() -- get time before audio
 		love.audio.stop()
 		love.audio.play(sound.beep)
