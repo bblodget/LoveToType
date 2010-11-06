@@ -1,5 +1,6 @@
 
 To Do List
+ - Allow spacebar to work like enter during game and lessons
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point
@@ -9,7 +10,6 @@ To Do List
  - When plane hits word have them wiggle a little bit
  - Write Lessons 4 - 8
  - Add ability for TAB and ENTER to select menu choices
- - Allow spacebar to work like enter during game?
  - Add and "About" or "Credits" page
 
 
