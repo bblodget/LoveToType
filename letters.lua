@@ -70,6 +70,10 @@ function Letters:keypressed(key, unicode)
 			key = string.upper(key)
 			if (key == ";") then
 				key = ":"
+			elseif (key == "/") then
+				key = "?"
+			elseif (key == "'") then
+				key = "\""
 			end
 			self.uppercase = false
 		end

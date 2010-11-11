@@ -1,7 +1,12 @@
-Done 11/6/2010
- - Allow spacebar to work like enter during game and lessons
+Done 11/11/2010
+ - Write 4a [/ ? ' "]
 
 To Do List
+ - Write Lesson 4 review.
+ - should really improve the way the "shift" key is handled.  
+ - Beep to indicate "can't do that" when hit backspace key.
+ - perhaps have option screen to enable backspace key.  Remember selections.
+ - Try changing the game to report wpm for the speed.
  - Fix it so each level keeps track of nonsense word length
  - Create a test for love 0.7.0 by checking for functions that only
    exist in 0.7 (hack).  Create routine that makes text anchor point

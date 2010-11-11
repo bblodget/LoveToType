@@ -136,7 +136,7 @@ function LessonMenu:mousepressed(x,y,button)
 				self.button.sub3 = Button.createTextButton("Lesson 3 Review",cx,yy+(s*2))
 			elseif n == "four" then
 				self.level = 4
-				self.button.sub1 = Button.createTextButton("Lesson 4-A    [? ' / \"]",cx,yy,false)
+				self.button.sub1 = Button.createTextButton("Lesson 4-A    [/ ? ' \"]",cx,yy)
 				self.button.sub2 = Button.createTextButton("Lesson 4 Review",cx,yy+(s*1),false)
 				self.button.sub3 = nil
 			elseif n == "five" then
@@ -193,6 +193,9 @@ function LessonMenu:sub1()
 		state = lesson:next()
 	elseif (self.level == 3) then
 		lesson = Lesson.create(data_3a)
+		state = lesson:next()
+	elseif (self.level == 4) then
+		lesson = Lesson.create(data_4a)
 		state = lesson:next()
 	end
 end
