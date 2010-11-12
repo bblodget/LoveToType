@@ -40,6 +40,7 @@ require "data_3a"
 require "data_3b"
 require "data_3r"
 require "data_4a"
+require "data_4r"
 
 function love.load()
 
