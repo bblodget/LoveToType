@@ -1,8 +1,8 @@
 Done 11/11/2010
  - Write 4a [/ ? ' "]
+ - Write Lesson 4 review.
 
 To Do List
- - Write Lesson 4 review.
  - should really improve the way the "shift" key is handled.  
  - Beep to indicate "can't do that" when hit backspace key.
  - perhaps have option screen to enable backspace key.  Remember selections.
