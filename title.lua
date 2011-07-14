@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- title.lua
 -- 
--- Copyright 2010 Brandon Blodget
+-- Copyright 2010, 2011 Brandon Blodget
 --
 -- This file is part of "Love To Type."
 --

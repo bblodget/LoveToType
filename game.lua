@@ -69,6 +69,7 @@ function Game.create(data)
 
 	self.y1 = 100
 	self.y2 = 250
+
 	self.game_over = false
 	self.line_count = 0  -- count of how many lines the plane has flown over
 
@@ -87,12 +88,12 @@ function Game.create(data)
 	}
 
 	self.words = {
-		{ word = "", line=1, x=200, y=self.y1+30, state="none"},
-		{ word = "", line=1, x=400, y=self.y1+55, state="none"},
-		{ word = "", line=1, x=600, y=self.y1+80, state="none"},
-		{ word = "", line=2, x=200, y=self.y2+30, state="none"},
-		{ word = "", line=2, x=400, y=self.y2+55, state="none"},
-		{ word = "", line=2, x=600, y=self.y2+80, state="none"}
+		{ word = "", line=1, x=200, y=self.y1+0, state="none"},
+		{ word = "", line=1, x=400, y=self.y1+30, state="none"},
+		{ word = "", line=1, x=600, y=self.y1+55, state="none"},
+		{ word = "", line=2, x=200, y=self.y2+0, state="none"},
+		{ word = "", line=2, x=400, y=self.y2+30, state="none"},
+		{ word = "", line=2, x=600, y=self.y2+55, state="none"}
 	}
 
 	love.graphics.setBackgroundColor(unpack(color.light_blue))
@@ -151,7 +152,8 @@ function Game:initBox()
 	self.rw = font.large:getWidth(max_str)
 	self.rh = font.large:getHeight() * 2
 	self.rx = 400 - (self.rw/2)
-	self.ry = 500 - (self.rh / 1.5)
+	-- self.ry = 500 - (self.rh / 1.5)
+	self.ry = 500  - (self.rh / 4)
 
 end
 

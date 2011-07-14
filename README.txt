@@ -12,13 +12,14 @@ found anything I like as well.
 
 Installation:
 
-To use Love To Type you must first install LÖVE 0.6.2.
-Downloads for Mac, Linux and Windows are available at
-http://love2d.org/.  After LÖVE 0.6.2 has been installed
-you can download the latest version of the
+The latest versions of LoveToType require LÖVE 0.7.2.
+(Version 0.5 and earlier required LÖVE 0.6.2.) LÖVE
+0.7.2 downloads for Mac, Linux and Windows are available
+at http://love2d.org/.  After LÖVE 0.7.2 has been
+installed you can download the latest version of the
 LoveToType.love file from the the download link at
-http://github.com/bblodget/LoveToType/.  Once the file
-had been downloaded, simply double-click it to run it.
+http://github.com/bblodget/LoveToType/.  Once the file had
+been downloaded, simply double-click it to run it.
 
 License:
 

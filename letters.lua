@@ -49,8 +49,11 @@ function Letters:draw()
 	local by = 125
 	local bs = 50
 
+	--local lx = bx - (self.l_width/2) + (bs/2)
+	--local ly = by + (self.l_height/2) + (bs/2) - 5
+	
 	local lx = bx - (self.l_width/2) + (bs/2)
-	local ly = by + (self.l_height/2) + (bs/2) - 5
+	local ly = by 
 
 
 	love.graphics.rectangle( "line", bx, by, bs, bs )

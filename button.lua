@@ -8,7 +8,8 @@
 -----------------------
 -- For use in Love To Type
 -- Modified: 10/17/2010 by Brandon Blodget
--- Copyright 2010 Brandon Blodget
+-- Modified: 7/13/2011 by Brandon Blodget
+-- Copyright 2010, 2011 Brandon Blodget
 -- License: GPL v3 or later
 -----------------------
 -- Handles buttons and such.
@@ -68,7 +69,7 @@ function Button:draw()
 		else 
 			love.graphics.setColor(unpack(color.black)) 
 		end
-		love.graphics.print(self.text, self.x, self.y)
+		love.graphics.print(self.text, self.x, self.y - self.height)
 	elseif (self.btype == "image") then
 		love.graphics.setColor(unpack(color.overlay))  
 		love.graphics.draw(self.image, self.x, self.y)

@@ -1,6 +1,6 @@
 -- conf.lua
 -- 
--- Copyright 2010 Brandon Blodget
+-- Copyright 2010, 2011 Brandon Blodget
 --
 -- This file is part of "Love To Type."
 --
@@ -18,10 +18,10 @@
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
 function love.conf(t)
-	t.title = "Love To Type version 0.4"
+	t.title = "LoveToType verion 0.6 -- requires LOVE 0.7.2"
 	t.author = "Brandon Blodget"
 	t.screen.width = 800
 	t.screen.height = 600
-	t.version = 0.62	-- required love version.
+	t.version = 072	-- required love version.
 end
 
