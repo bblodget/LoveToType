@@ -18,10 +18,21 @@
 -- along with "Love To Type".  If not, see <http://www.gnu.org/licenses/>.
 
 function love.conf(t)
-	t.title = "LoveToType verion 0.6 -- requires LOVE 0.7.2"
+	t.title = "LoveToType"
 	t.author = "Brandon Blodget"
-	t.screen.width = 800
-	t.screen.height = 600
-	t.version = 072	-- required love version.
+	
+	-- Updated from t.screen to t.window for LÖVE 11.5 compatibility
+	t.window = t.window or {}  -- Create window table if it doesn't exist
+	t.window.width = 800
+	t.window.height = 600
+	
+	-- Updated from numeric code to string format
+	t.version = "11.5"  -- This tells LÖVE which version we're targeting
+	
+	-- Additional modern settings
+	t.console = false
+	t.window.resizable = false
+	t.window.minwidth = 800
+	t.window.minheight = 600
 end
 

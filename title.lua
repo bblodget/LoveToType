@@ -76,7 +76,7 @@ function Title:mousepressed(x,y,button)
 				self:toggleScreen()
 			elseif n == "quit" then
 				self:windowScreen()
-				love.event.push("q")
+				love.event.quit()
 			end
 		end
 	end
@@ -85,7 +85,7 @@ end
 
 function Title:keypressed(key)
 	if key == "escape" then
-		love.event.push("q")
+		love.event.quit()
 	end
 end
 
@@ -102,18 +102,18 @@ function Title:toggleScreen()
 end
 
 function Title:fullScreen()
-	if (not self.full_screen) then
-		-- change to full screen
-		local changed = love.graphics.toggleFullscreen()
-		if (changed) then
-			self.full_screen = true
-		end
+	-- change to full screen mode
+	-- Updated from love.graphics.toggleFullscreen to love.window.setFullscreen for LÖVE 11.5
+	local changed = love.window.setFullscreen(true)
+	if (changed) then
+		self.full_screen = true
 	end
 end
 
 function Title:windowScreen()
 	-- change to window mode
-	local changed = love.graphics.setMode(800,600,false,true)
+	-- Updated from love.graphics.setMode to love.window.setMode for LÖVE 11.5
+	local changed = love.window.setMode(800, 600, {fullscreen=false, vsync=true})
 	if (changed) then
 		self.full_screen = false
 	end

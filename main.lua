@@ -45,15 +45,15 @@ require "data_4r"
 function love.load()
 
 	-- Resources
-	color = {	light_blue = {128,128,255},
-				bright_blue = {63,193,245},
-				dark_blue = {64,64,255},
-				light_green = {128,255,128},
-				pink = {255,128,128},
-				purple = {130,41,79},
-				black = {0,0,0},
-				white = {255,255,255},
-				overlay = {255,255,255,235} }
+	color = {	light_blue = {128/255, 128/255, 255/255},
+				bright_blue = {63/255, 193/255, 245/255},
+				dark_blue = {64/255, 64/255, 255/255},
+				light_green = {128/255, 255/255, 128/255},
+				pink = {255/255, 128/255, 128/255},
+				purple = {130/255, 41/255, 79/255},
+				black = {0, 0, 0},
+				white = {1, 1, 1},
+				overlay = {1, 1, 1, 235/255} }
 
 
 	font_name = "fonts/PT_Sans-Regular.ttf"

@@ -95,7 +95,7 @@ function LessonMenu:draw()
 
 	-- draw line under selected level
 	love.graphics.setColor(unpack(color.bright_blue))
-	love.graphics.setLine(4, "rough")
+	love.graphics.setLineWidth(4)
 	local l = self.level - 1
 	love.graphics.line((self.xx-15)+((l)*self.s),(self.y+5),(self.xx+15)+((l)*self.s),(self.y+5))
 
@@ -151,7 +151,7 @@ function LessonMenu:mousepressed(x,y,button)
 				self.button.sub3 = Button.createTextButton("Lesson 6 Review",cx,yy+(s*2),false)
 			elseif n == "seven" then
 				self.level = 7
-				self.button.sub1 = Button.createTextButton("Lesson 7-A    [5 % \ -]",cx,yy,false)
+				self.button.sub1 = Button.createTextButton("Lesson 7-A    [5 % \\ -]",cx,yy,false)
 				self.button.sub2 = Button.createTextButton("Lesson 7-B    [6 = +]",cx,yy+(s*1),false)
 				self.button.sub3 = Button.createTextButton("Lesson 7 Review",cx,yy+(s*2),false)
 			elseif n == "eight" then

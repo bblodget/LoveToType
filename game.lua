@@ -451,13 +451,9 @@ function Game:mousepressed(x,y,button)
 end
 
 function Game:keypressed(key)
-	return
-end
-
-function Game:keypressed(key)
 	if key == "escape" then
 		state = GameMenu.create()
-	elseif (key == "return" or key == " ") then
+	elseif (key == "return" or key == "space") then
 		if (game_over) then return end
 
 		self.etime = love.timer.getTime() -- get time before audio
@@ -508,6 +504,11 @@ function Game:keypressed(key)
 	else
 		if (game_over) then return end
 
+		-- Special case for space key in LÖVE 11.5
+		if key == "space" then
+			key = " "  -- Convert "space" to a single space character
+		end
+		
 		if (self.uppercase) then
 			-- convert to upper case
 			key = string.upper(key)

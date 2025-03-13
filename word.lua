@@ -165,7 +165,7 @@ function Word:keypressed(key, unicode)
 	if key == "escape" then
 		state = LessonMenu.create()
 	elseif (key == "return" or   -- return
-			(key == " " and self.input == self.target) or -- space at end
+			(key == "space" and self.input == self.target) or -- Updated from " " to "space" for LÖVE 11.5
 			# self.input > # self.target  -- too many characters
 			) then
 
@@ -204,6 +204,11 @@ function Word:keypressed(key, unicode)
 			key == "lshift")  then
 			self.uppercase = true
 	else
+		-- Special case for space key in LÖVE 11.5
+		if key == "space" then
+			key = " "  -- Convert "space" to a single space character
+		end
+		
 		if (self.uppercase) then
 			-- convert to upper case
 			key = string.upper(key)
