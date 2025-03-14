@@ -4,7 +4,7 @@ A touch typing tutor written in Lua using the LÖVE 2D API.
 
 Love To Type is based on the TI-99/4a Touch Typing Tutor program from the early 1980s. This is the program from which I learned touch typing. I've been looking for touch typing software for my children but have not found anything I like as well.
 
-![Lesson Selection Screen](lesson.png)
+![Lesson Selection Screen](docs/imageslesson.png)
 
 ## Features
 
@@ -117,7 +117,7 @@ You can exit any lesson at any time by pressing the Escape key.
 
 ### Game Mode
 
-![Gameplay Screen](game.png)
+![Gameplay Screen](docs/images/game.png)
 
 - The airplane flies across the screen, leaving words in its wake
 - Type any of the words you see and press ENTER or SPACEBAR
