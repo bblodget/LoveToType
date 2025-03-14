@@ -39,11 +39,11 @@ function Title.create(isWeb)
 		title = Button.createTextButton("To Type", 430, 120, false),
 		lessons = Button.createTextButton("Lessons", 400, 250),
 		game = Button.createTextButton("Game", 400, 300),
-		screen = Button.createTextButton("Full Screen", 400, 350),
 	}
 	
-	-- Only add quit button if not running on web
+	-- Only add Full Screen button if not running on web
 	if not self.isWeb then
+		self.button.screen = Button.createTextButton("Full Screen", 400, 350)
 		self.button.quit = Button.createTextButton("Quit", 400, 400)
 	end
 
