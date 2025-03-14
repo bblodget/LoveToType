@@ -10,11 +10,14 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:,">
     <script type="text/javascript">
+      // Check for SharedArrayBuffer support before loading the game
+      if (typeof SharedArrayBuffer === 'undefined') {
+        window.location.href = 'compatibility.html';
+      }
+
       // Configure the game to load our specific .love file
       var Module = {
-        arguments: ["./LoveToType.love"],
-        // Disable SharedArrayBuffer check as a workaround
-        noSharedArrayBufferCheck: true
+        arguments: ["./LoveToType.love"]
       };
     </script>
   </head>

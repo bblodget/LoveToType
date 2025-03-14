@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Compatibility Issue - LoveToType</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .solution {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Browser Compatibility Issue</h1>
+        <p>Unfortunately, LoveToType cannot run in your browser because it requires features that are not currently available. The game uses WebAssembly with SharedArrayBuffer, which requires specific security settings.</p>
+        
+        <div class="solution">
+            <h2>Solutions:</h2>
+            <ol>
+                <li>
+                    <strong>Download the desktop version:</strong>
+                    <p>You can download the game and play it on your computer with LÖVE.</p>
+                    <a href="LoveToType.love" download class="download-btn">Download LoveToType.love</a>
+                    <p><small>You'll need to install <a href="https://love2d.org/" target="_blank">LÖVE</a> to play the game.</small></p>
+                </li>
+                <li>
+                    <strong>Try a different browser:</strong>
+                    <p>Use a modern version of Chrome, Firefox, or Edge, and make sure it's updated to the latest version.</p>
+                </li>
+                <li>
+                    <strong>Use a compatible hosting:</strong>
+                    <p>GitHub Pages doesn't support the required security headers. Visit this game on a platform with proper Cross-Origin Isolation support.</p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html> 

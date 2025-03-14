@@ -95,12 +95,12 @@
           window.location.reload();
       };
       
-      // Check if we should bypass the SharedArrayBuffer check
-      if (Module.noSharedArrayBufferCheck || window.SharedArrayBuffer) {
-        window.runLove();
-      } else {
-        console.error('The Cross-Origin Policy is not configured properly');
-        spinner.className = 'error';
+      if (!window.SharedArrayBuffer) {
+        //alert('The Cross-Origin Policy is not configured properly');
+        throw new Error('The Cross-Origin Policy is not configured properly');
+        return;
       }
+      
+      window.runLove();
     });
 };
