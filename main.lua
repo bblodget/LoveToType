@@ -103,7 +103,7 @@ function love.load()
 	wpm = 0		-- the result of last test
 	lesson = nil	-- the current lesson
 
-	state = Title.create() -- start the program with title screen.
+	state = Title.create(isWeb) -- start the program with title screen, passing isWeb flag
 
 end
 

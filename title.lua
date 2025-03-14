@@ -23,13 +23,16 @@
 Title = {}
 Title.__index = Title
 
-function Title.create()
+function Title.create(isWeb)
 	local self = Title
 
-	-- only need one instance of Title
-	if (self.initialized) then
+	-- Only pass isWeb on first call
+	if self.initialized then
 		return self
 	end
+	
+	-- Store isWeb flag
+	self.isWeb = isWeb or false
 
 	self.button = {	
 		logo = Button.createImageButton(graphics.logo, 320, 110),
@@ -37,8 +40,12 @@ function Title.create()
 		lessons = Button.createTextButton("Lessons", 400, 250),
 		game = Button.createTextButton("Game", 400, 300),
 		screen = Button.createTextButton("Full Screen", 400, 350),
-		quit = Button.createTextButton("Quit", 400, 400) 
-		}
+	}
+	
+	-- Only add quit button if not running on web
+	if not self.isWeb then
+		self.button.quit = Button.createTextButton("Quit", 400, 400)
+	end
 
 	self.full_screen = false
 
@@ -84,7 +91,7 @@ function Title:mousepressed(x,y,button)
 end
 
 function Title:keypressed(key)
-	if key == "escape" then
+	if key == "escape" and not self.isWeb then
 		love.event.quit()
 	end
 end
