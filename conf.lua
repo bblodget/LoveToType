@@ -34,5 +34,13 @@ function love.conf(t)
 	t.window.resizable = false
 	t.window.minwidth = 800
 	t.window.minheight = 600
+	
+	-- Conditionally disable audio modules for web
+	-- This is called before love.system is available, so we can't use love.system.getOS()
+	-- Instead, we'll rely on the runtime detection in main.lua
+	if os.getenv("EMSCRIPTEN") then
+		t.modules.audio = false
+		t.modules.sound = false
+	end
 end
 

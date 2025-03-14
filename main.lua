@@ -43,6 +43,26 @@ require "data_4a"
 require "data_4r"
 
 function love.load()
+	-- Detect if we're running on the web
+	local isWeb = love.system.getOS() == "Web"
+	
+	-- Disable audio for web version to avoid browser compatibility issues
+	if isWeb then
+		-- Create dummy audio functions for web version
+		local originalAudioFunctions = {}
+		originalAudioFunctions.stop = love.audio.stop
+		originalAudioFunctions.play = love.audio.play
+		originalAudioFunctions.newSource = love.audio.newSource
+		
+		-- Replace with no-op versions
+		love.audio.stop = function() end
+		love.audio.play = function(source) end
+		love.audio.newSource = function(filename, type) 
+			return {} -- Return empty table instead of source
+		end
+		
+		print("Running on web - audio disabled")
+	end
 
 	-- Resources
 	color = {	light_blue = {128/255, 128/255, 255/255},
