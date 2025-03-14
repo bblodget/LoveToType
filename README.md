@@ -6,6 +6,8 @@ Love To Type is based on the TI-99/4a Touch Typing Tutor program from the early
 1980s. This is the program from which I learned touch typing. 
 I initially wrote this program back in 2010 for my children to learn typing.
 
+**Latest Release: [Version 0.7](https://github.com/bblodget/LoveToType/releases/tag/LoveToType_0.7)** - See the [release notes](release_0_7.md) for details on the latest improvements.
+
 ![Lesson Selection Screen](docs/images/lesson.png)
 
 ## Features
