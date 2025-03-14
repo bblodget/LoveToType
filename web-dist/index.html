@@ -3,12 +3,18 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- Security headers for Cross-Origin Isolation -->
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
     <title>LoveToType</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
     <script type="text/javascript">
       // Configure the game to load our specific .love file
       var Module = {
-        arguments: ["./LoveToType.love"]
+        arguments: ["./LoveToType.love"],
+        // Disable SharedArrayBuffer check as a workaround
+        noSharedArrayBufferCheck: true
       };
     </script>
   </head>
